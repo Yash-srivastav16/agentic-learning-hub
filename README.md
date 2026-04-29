@@ -41,6 +41,7 @@ The project also includes a Codex skill, `course-lms-builder`, that can generate
 The active example app in this repo is:
 
 - [apps/docker-learning-hub](./apps/docker-learning-hub)
+- Live demo: [https://yash-srivastav16.github.io/agentic-learning-hub/](https://yash-srivastav16.github.io/agentic-learning-hub/)
 
 ## What the site includes
 
@@ -116,6 +117,31 @@ Then open:
 ```text
 http://localhost:8000
 ```
+
+## Deployment
+
+This repo is set up to deploy the Docker course app to **GitHub Pages** from:
+
+```text
+apps/docker-learning-hub
+```
+
+The workflow file is:
+
+- [deploy-pages.yml](./.github/workflows/deploy-pages.yml)
+
+### Expected production URL
+
+- [https://yash-srivastav16.github.io/agentic-learning-hub/](https://yash-srivastav16.github.io/agentic-learning-hub/)
+
+### GitHub Pages setup
+
+In the GitHub repo settings:
+- open `Settings`
+- open `Pages`
+- under `Build and deployment`, select `GitHub Actions`
+
+After that, every push to `main` will deploy the static site automatically.
 
 ## Local storage behavior
 
@@ -310,8 +336,8 @@ So the outcome is not only a Docker course site, but also a reusable workflow fo
 
 ## Links
 
-Add your public links here before sharing:
+Public links:
 
-- GitHub repo: `YOUR_GITHUB_URL`
-- Live demo: `YOUR_DEPLOYED_URL`
+- GitHub repo: [https://github.com/Yash-srivastav16/agentic-learning-hub](https://github.com/Yash-srivastav16/agentic-learning-hub)
+- Live demo: [https://yash-srivastav16.github.io/agentic-learning-hub/](https://yash-srivastav16.github.io/agentic-learning-hub/)
 - LinkedIn carousel/screenshots: `OPTIONAL_LINK`

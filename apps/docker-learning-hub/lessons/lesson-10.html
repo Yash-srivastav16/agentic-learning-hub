@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 10 | Health Checks and Readiness</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🐳</span>
+          Docker Learning Hub
+        </div>
+        <span class="brand-sub">Lesson 10 • Health checks and container readiness</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 10</h2>
+            <p>This lesson explains why a running container is not always a ready application, and how health checks help Docker verify real readiness.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html">
+              <span class="icon-badge icon-orange">O</span>
+              <span><strong>Overview</strong>Course landing and structure</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-1.html">
+              <span class="icon-badge icon-sea">1</span>
+              <span><strong>Lesson 1</strong>Docker basics and purpose</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-2.html">
+              <span class="icon-badge icon-mint">2</span>
+              <span><strong>Lesson 2</strong>Images, containers, and Dockerfile</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-3.html">
+              <span class="icon-badge icon-orange">3</span>
+              <span><strong>Lesson 3</strong>Build your first real Dockerized app</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-4.html">
+              <span class="icon-badge icon-sea">4</span>
+              <span><strong>Lesson 4</strong>Volumes and persistent data</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-5.html">
+              <span class="icon-badge icon-mint">5</span>
+              <span><strong>Lesson 5</strong>Networks and container communication</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-6.html">
+              <span class="icon-badge icon-violet">6</span>
+              <span><strong>Lesson 6</strong>Compose and multi-container setup</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-7.html">
+              <span class="icon-badge icon-orange">7</span>
+              <span><strong>Lesson 7</strong>Environment variables and configuration</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-8.html">
+              <span class="icon-badge icon-sea">8</span>
+              <span><strong>Lesson 8</strong>Build a small real Docker project</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-9.html">
+              <span class="icon-badge icon-mint">9</span>
+              <span><strong>Lesson 9</strong>Docker debugging and troubleshooting</span>
+            </a>
+            <a class="sidebar-link active" href="./lesson-10.html">
+              <span class="icon-badge icon-violet">10</span>
+              <span><strong>Lesson 10</strong>Health checks and readiness</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-11.html">
+              <span class="icon-badge icon-orange">11</span>
+              <span><strong>Lesson 11</strong>Docker image optimization</span>
+            </a>
+            <a class="sidebar-link" href="../revision.html">
+              <span class="icon-badge icon-violet">R</span>
+              <span><strong>Revision</strong>Quick review and next topics</span>
+            </a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 10</span>
+                <h1>Health checks and container readiness</h1>
+              </div>
+              <p>This page covers one of the most important real-world Docker ideas: a container can be running while the application inside it is still not ready.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <circle cx="18" cy="18" r="12" fill="#0db7ed"></circle>
+                      <path d="M12 18h12M18 12v12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main idea</h3></div>
+                </div>
+                <p>Running means the process started. Healthy means the app is actually responding correctly.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="8" y="10" width="20" height="16" rx="4" fill="#10b981"></rect>
+                      <path d="M13 18l3 3 7-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Why it matters</h3></div>
+                </div>
+                <p>Startup order alone does not guarantee that databases, APIs, or apps are fully ready to accept traffic.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <path d="M18 8 28 26H8Z" fill="#7c3aed"></path>
+                      <path d="M18 14v5M18 23h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main warning</h3></div>
+                </div>
+                <p><code>depends_on</code> helps startup order, but it does not guarantee service readiness by itself.</p>
+              </article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Running vs healthy</h3>
+                <div class="mini-stack">
+                  <div><strong>Running</strong> Container process started</div>
+                  <div><strong>Healthy</strong> Application responds correctly</div>
+                  <div><strong>Important</strong> Running is not always enough</div>
+                </div>
+              </article>
+
+              <article class="diagram-card">
+                <h3>Simple readiness flow</h3>
+                <div class="mini-stack">
+                  <div><strong>Container starts</strong></div>
+                  <div><strong>Docker runs health check</strong></div>
+                  <div><strong>Pass = healthy</strong></div>
+                  <div><strong>Fail = unhealthy</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Dockerfile example</h3>
+                <div class="code-box">
+                  <code>HEALTHCHECK CMD curl --fail http://localhost:3000/health || exit 1</code>
+                </div>
+                <p>Docker calls a health endpoint and marks the container unhealthy if the check fails.</p>
+              </article>
+
+              <article class="card">
+                <h3>Compose example</h3>
+                <div class="code-box">
+                  <code>services:
+  app:
+    build: .
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3</code>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Health check fields</h3>
+                <ul>
+                  <li><code>test</code> defines the command Docker should run.</li>
+                  <li><code>interval</code> defines how often Docker checks.</li>
+                  <li><code>timeout</code> defines how long one check may take.</li>
+                  <li><code>retries</code> defines how many failures happen before the container is marked unhealthy.</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Common beginner mistakes</h3>
+                <ul>
+                  <li>Thinking running means ready.</li>
+                  <li>Relying on <code>depends_on</code> alone.</li>
+                  <li>Using a health check command that is not installed in the container.</li>
+                  <li>Making checks too fast for slow-starting apps.</li>
+                </ul>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Why health checks are useful</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Apps answer clearly</strong><br />A `/health` endpoint gives Docker a simple way to verify readiness.</div>
+                <div class="layer"><strong>Databases need warm-up time</strong><br />A service can be running but not ready for connections yet.</div>
+                <div class="layer"><strong>Docker gets a better signal</strong><br />Healthy and unhealthy status is more meaningful than running status alone.</div>
+                <div class="layer"><strong>Projects become more reliable</strong><br />Multi-container setups behave more predictably.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 11 explores Docker image optimization so your builds become smaller, cleaner, and faster.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

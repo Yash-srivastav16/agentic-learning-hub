@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docker Learning Hub</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🐳</span>
+          Docker Learning Hub
+        </div>
+        <span class="brand-sub">Beginner-friendly Docker learning journey</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Course Map</h2>
+            <p>A cleaner multi-page structure so each topic has room and the learning path feels organized.</p>
+          </div>
+
+          <nav class="sidebar-nav">
+            <a class="sidebar-link active" href="./index.html">
+              <span class="icon-badge icon-orange">O</span>
+              <span><strong>Overview</strong>Start here and understand the full learning path</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-1.html">
+              <span class="icon-badge icon-sea">1</span>
+              <span><strong>Lesson 1</strong>Docker basics, purpose, and simple mental models</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-2.html">
+              <span class="icon-badge icon-mint">2</span>
+              <span><strong>Lesson 2</strong>Images, containers, Dockerfile, and build flow</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-3.html">
+              <span class="icon-badge icon-orange">3</span>
+              <span><strong>Lesson 3</strong>Build your first real Dockerized app step by step</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-4.html">
+              <span class="icon-badge icon-sea">4</span>
+              <span><strong>Lesson 4</strong>Volumes and how Docker keeps data persistent</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-5.html">
+              <span class="icon-badge icon-mint">5</span>
+              <span><strong>Lesson 5</strong>Networks and how containers communicate</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-6.html">
+              <span class="icon-badge icon-violet">6</span>
+              <span><strong>Lesson 6</strong>Compose and multi-container app setup</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-7.html">
+              <span class="icon-badge icon-orange">7</span>
+              <span><strong>Lesson 7</strong>Environment variables and app configuration</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-8.html">
+              <span class="icon-badge icon-sea">8</span>
+              <span><strong>Lesson 8</strong>Build a small real Docker project</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-9.html">
+              <span class="icon-badge icon-mint">9</span>
+              <span><strong>Lesson 9</strong>Docker debugging and troubleshooting</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-10.html">
+              <span class="icon-badge icon-violet">10</span>
+              <span><strong>Lesson 10</strong>Health checks and readiness</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-11.html">
+              <span class="icon-badge icon-orange">11</span>
+              <span><strong>Lesson 11</strong>Docker image optimization</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-12.html">
+              <span class="icon-badge icon-sea">12</span>
+              <span><strong>Lesson 12</strong>Dockerfile best practices</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-13.html">
+              <span class="icon-badge icon-mint">13</span>
+              <span><strong>Lesson 13</strong>Bind mounts vs volumes</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-14.html">
+              <span class="icon-badge icon-violet">14</span>
+              <span><strong>Lesson 14</strong>Multi-stage builds</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-15.html">
+              <span class="icon-badge icon-orange">15</span>
+              <span><strong>Lesson 15</strong>Docker Hub and registries</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-16.html">
+              <span class="icon-badge icon-sea">16</span>
+              <span><strong>Lesson 16</strong>Docker security basics</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-17.html">
+              <span class="icon-badge icon-mint">17</span>
+              <span><strong>Lesson 17</strong>Development vs production setup</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-18.html">
+              <span class="icon-badge icon-sea">18</span>
+              <span><strong>Lesson 18</strong>Deploying Docker apps</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-19.html">
+              <span class="icon-badge icon-mint">19</span>
+              <span><strong>Lesson 19</strong>Reverse proxy with Nginx</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-20.html">
+              <span class="icon-badge icon-violet">20</span>
+              <span><strong>Lesson 20</strong>Dockerizing full stack apps</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-21.html">
+              <span class="icon-badge icon-orange">21</span>
+              <span><strong>Lesson 21</strong>Working with databases in Docker</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-22.html">
+              <span class="icon-badge icon-sea">22</span>
+              <span><strong>Lesson 22</strong>CI/CD with Docker</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-23.html">
+              <span class="icon-badge icon-mint">23</span>
+              <span><strong>Lesson 23</strong>Monitoring and logs</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-24.html">
+              <span class="icon-badge icon-violet">24</span>
+              <span><strong>Lesson 24</strong>Compose advanced patterns</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-25.html">
+              <span class="icon-badge icon-orange">25</span>
+              <span><strong>Lesson 25</strong>Docker in team projects</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-26.html">
+              <span class="icon-badge icon-sea">26</span>
+              <span><strong>Lesson 26</strong>Introduction to Kubernetes</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-27.html">
+              <span class="icon-badge icon-mint">27</span>
+              <span><strong>Lesson 27</strong>Scaling containers</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-28.html">
+              <span class="icon-badge icon-violet">28</span>
+              <span><strong>Lesson 28</strong>Container orchestration concepts</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-29.html">
+              <span class="icon-badge icon-orange">29</span>
+              <span><strong>Lesson 29</strong>Production security and hardening</span>
+            </a>
+            <a class="sidebar-link" href="./lessons/lesson-30.html">
+              <span class="icon-badge icon-sea">30</span>
+              <span><strong>Lesson 30</strong>Real-world deployment architectures</span>
+            </a>
+            <a class="sidebar-link" href="./revision.html">
+              <span class="icon-badge icon-violet">R</span>
+              <span><strong>Revision</strong>Quick recall, questions, and next steps</span>
+            </a>
+            <a class="sidebar-link" href="./course-summary.html">
+              <span class="icon-badge icon-orange">S</span>
+              <span><strong>Summary</strong>Full course wrap-up</span>
+            </a>
+          </nav>
+
+          <div class="progress-card">
+            <strong>Stage Progress</strong>
+            <p>This mini site now covers thirty Docker lessons, from beginner basics through scaling, orchestration, and architecture thinking.</p>
+            <div class="progress-meta">
+              <span>Current stage</span>
+              <strong>Phase 4 added</strong>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width: 100%;"></div>
+            </div>
+            <div class="progress-steps">
+              <div class="progress-step done">
+                <span class="progress-dot"></span>
+                <span>Phase 1: Beginner foundation</span>
+                <strong>Done</strong>
+              </div>
+              <div class="progress-step done">
+                <span class="progress-dot"></span>
+                <span>Phase 1 continued: workflow lessons 6-10</span>
+                <strong>Done</strong>
+              </div>
+              <div class="progress-step active">
+                <span class="progress-dot"></span>
+                <span>Phase 2: Lessons 11-17</span>
+                <strong>Done</strong>
+              </div>
+              <div class="progress-step active">
+                <span class="progress-dot"></span>
+                <span>Phase 3: Lessons 18-25</span>
+                <strong>Done</strong>
+              </div>
+              <div class="progress-step active">
+                <span class="progress-dot"></span>
+                <span>Phase 4: Lessons 26-30</span>
+                <strong>Done</strong>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <main class="content">
+          <section class="hero">
+            <div>
+              <span class="eyebrow">Phase 4 Added</span>
+              <h1>Learn Docker in a structured way, from first concepts to practical build flow.</h1>
+              <p>
+                This site is designed like a small learning product. Instead of putting everything on one long page,
+                it separates the overview, core lessons, and revision into clearer steps so the ideas are easier to absorb.
+              </p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="./lessons/lesson-1.html">Start Lesson 1</a>
+                <a class="button button-secondary" href="./lessons/lesson-30.html">Open Lesson 30</a>
+              </div>
+              <div class="hero-stats">
+                <div class="stat">
+                  <strong>35 pages</strong>
+                  <span>Overview, thirty lessons, revision, summary, glossary, and certificate pages</span>
+                </div>
+                <div class="stat">
+                  <strong>Visual-first</strong>
+                  <span>Diagrams, flows, and calm content blocks</span>
+                </div>
+                <div class="stat">
+                  <strong>Study-ready</strong>
+                  <span>Built for learning, not just reading once</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-visual">
+              <div class="visual-head">
+                <span class="visual-label">How the system fits together</span>
+                <span class="pill">Structured visual overview</span>
+              </div>
+              <div class="hero-graphic">
+                <div class="hero-orbit">
+                  <div class="orbit-ring"></div>
+                  <div class="orbit-core">
+                    Docker
+                    <small>Consistent app delivery</small>
+                  </div>
+                  <div class="orbit-node node-top">
+                    <div class="orbit-icon orange">A</div>
+                    <strong>App Files</strong>
+                    <span>Code and config</span>
+                  </div>
+                  <div class="orbit-node node-right">
+                    <div class="orbit-icon sea">D</div>
+                    <strong>Dockerfile</strong>
+                    <span>Packaging instructions</span>
+                  </div>
+                  <div class="orbit-node node-bottom">
+                    <div class="orbit-icon mint">I</div>
+                    <strong>Image</strong>
+                    <span>Reusable blueprint</span>
+                  </div>
+                  <div class="orbit-node node-left">
+                    <div class="orbit-icon violet">C</div>
+                    <strong>Container</strong>
+                    <span>Running instance</span>
+                  </div>
+                </div>
+                <div class="hero-caption">
+                  <div class="caption-pill">Portable setup</div>
+                  <div class="caption-pill">Repeatable builds</div>
+                  <div class="caption-pill">Isolated runtime</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Sequential Roadmap</span>
+                <h2>Learn Docker in the right order</h2>
+              </div>
+              <p>The path now stays sequential through all four phases, so each topic builds naturally on the last one.</p>
+            </div>
+
+            <div class="two-up" style="margin-bottom: 16px;">
+              <article class="card">
+                <h3>Phase 1: Beginner Foundation</h3>
+                <ul>
+                  <li>Lesson 1 to Lesson 5 build the beginner base.</li>
+                  <li>You learn Docker basics, images, containers, first app, volumes, and networks.</li>
+                  <li>This phase is complete.</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Phase 1 Continued: Core Workflow</h3>
+                <ul>
+                  <li>Lesson 6 to Lesson 10 continue the foundation in sequence.</li>
+                  <li>You learn Compose, environment variables, real project structure, debugging, and health checks.</li>
+                  <li>This part is also complete.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-bottom: 16px;">
+              <article class="card">
+                <h3>Phase 2: Strong Intermediate Level</h3>
+                <ul>
+                  <li>Lesson 11 to Lesson 17 improve image quality, Dockerfile quality, storage decisions, and production awareness.</li>
+                  <li>You learn optimization, best practices, registries, security basics, and development vs production thinking.</li>
+                  <li>This phase is complete.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Phase 3: Advanced Practical Learning</h3>
+                <ul>
+                  <li>Lesson 18 to Lesson 25 apply Docker to deployment, full stack systems, databases, CI/CD, monitoring, and team workflows.</li>
+                  <li>This is where Docker becomes more like real engineering practice than isolated local commands.</li>
+                  <li>This phase is complete.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-bottom: 16px;">
+              <article class="card">
+                <h3>Phase 4: Beyond Docker Basics</h3>
+                <ul>
+                  <li>Lesson 26 to Lesson 30 introduce Kubernetes, scaling, orchestration, hardening, and larger deployment architectures.</li>
+                  <li>This phase helps you understand how Docker fits into broader platform and operations thinking.</li>
+                  <li>This phase is now included.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>End of Current Roadmap</h3>
+                <ul>
+                  <li>The site now covers Lessons 1 through 30 in sequence.</li>
+                  <li>You can move from basic Docker understanding to advanced architectural awareness in one path.</li>
+                  <li>Revision is available at the end for recap and questions.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="feature-grid">
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">1</span>
+                  <h3>Lesson 1: Docker Basics</h3>
+                </div>
+                <p>Understand what Docker is, why it is used, how it solves environment mismatch, and how to think about images and containers in simple terms.</p>
+                <a class="button button-secondary" href="./lessons/lesson-1.html">Open Lesson 1</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">2</span>
+                  <h3>Lesson 2: Dockerfile and Build Flow</h3>
+                </div>
+                <p>Learn how Docker images are created, how containers are started, and how a Dockerfile controls the packaging process.</p>
+                <a class="button button-secondary" href="./lessons/lesson-2.html">Open Lesson 2</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-orange">3</span>
+                  <h3>Lesson 3: Your First Real App</h3>
+                </div>
+                <p>Build a small Node.js app, write its Dockerfile, create an image, run a container, and verify the app from the browser.</p>
+                <a class="button button-secondary" href="./lessons/lesson-3.html">Open Lesson 3</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">4</span>
+                  <h3>Lesson 4: Docker Volumes</h3>
+                </div>
+                <p>Learn why container data can disappear, what volumes solve, and how to use them for persistent app data.</p>
+                <a class="button button-secondary" href="./lessons/lesson-4.html">Open Lesson 4</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">5</span>
+                  <h3>Lesson 5: Docker Networks</h3>
+                </div>
+                <p>Learn how containers talk to each other, why `localhost` causes confusion, and how shared networks simplify multi-container apps.</p>
+                <a class="button button-secondary" href="./lessons/lesson-5.html">Open Lesson 5</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-violet">6</span>
+                  <h3>Lesson 6: Docker Compose</h3>
+                </div>
+                <p>Learn how to define app, database, volumes, and ports together in one YAML file and start the full setup with a single command.</p>
+                <a class="button button-secondary" href="./lessons/lesson-6.html">Open Lesson 6</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-orange">7</span>
+                  <h3>Lesson 7: Environment Variables</h3>
+                </div>
+                <p>Learn how to pass configuration like ports, database hosts, and secrets into containers without hardcoding values in app code.</p>
+                <a class="button button-secondary" href="./lessons/lesson-7.html">Open Lesson 7</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">8</span>
+                  <h3>Lesson 8: Small Real Docker Project</h3>
+                </div>
+                <p>Combine Dockerfile, Compose, environment variables, networking, and volumes into one practical beginner-friendly project setup.</p>
+                <a class="button button-secondary" href="./lessons/lesson-8.html">Open Lesson 8</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">9</span>
+                  <h3>Lesson 9: Docker Debugging</h3>
+                </div>
+                <p>Learn how to check container status, read logs, inspect runtime values, and fix the most common beginner Docker issues.</p>
+                <a class="button button-secondary" href="./lessons/lesson-9.html">Open Lesson 9</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-violet">10</span>
+                  <h3>Lesson 10: Health Checks</h3>
+                </div>
+                <p>Learn why running is not always the same as ready, and how Docker health checks make container behavior more reliable.</p>
+                <a class="button button-secondary" href="./lessons/lesson-10.html">Open Lesson 10</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-orange">11</span>
+                  <h3>Lesson 11: Image Optimization</h3>
+                </div>
+                <p>Learn how to make Docker images smaller, faster to build, and cleaner by using better base images, ignore rules, and caching strategy.</p>
+                <a class="button button-secondary" href="./lessons/lesson-11.html">Open Lesson 11</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">12</span>
+                  <h3>Lesson 12: Dockerfile Best Practices</h3>
+                </div>
+                <p>Learn how to write Dockerfiles that are readable, stable, cache-friendly, and easier to maintain long term.</p>
+                <a class="button button-secondary" href="./lessons/lesson-12.html">Open Lesson 12</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">13</span>
+                  <h3>Lesson 13: Bind Mounts vs Volumes</h3>
+                </div>
+                <p>Learn when local host paths are best for development and when Docker-managed volumes are better for persistence.</p>
+                <a class="button button-secondary" href="./lessons/lesson-13.html">Open Lesson 13</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-violet">14</span>
+                  <h3>Lesson 14: Multi-Stage Builds</h3>
+                </div>
+                <p>Learn how to separate build stages from runtime stages so final images stay smaller and cleaner.</p>
+                <a class="button button-secondary" href="./lessons/lesson-14.html">Open Lesson 14</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-orange">15</span>
+                  <h3>Lesson 15: Docker Hub and Registries</h3>
+                </div>
+                <p>Learn how to tag, push, pull, and share images properly across machines and environments.</p>
+                <a class="button button-secondary" href="./lessons/lesson-15.html">Open Lesson 15</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">16</span>
+                  <h3>Lesson 16: Docker Security Basics</h3>
+                </div>
+                <p>Learn the first practical container safety habits around users, secrets, smaller images, and trusted base images.</p>
+                <a class="button button-secondary" href="./lessons/lesson-16.html">Open Lesson 16</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">17</span>
+                  <h3>Lesson 17: Development vs Production</h3>
+                </div>
+                <p>Learn why development Docker emphasizes speed and editing while production Docker emphasizes stability and repeatability.</p>
+                <a class="button button-secondary" href="./lessons/lesson-17.html">Open Lesson 17</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">18</span>
+                  <h3>Lesson 18: Deploying Docker Apps</h3>
+                </div>
+                <p>Learn how Docker moves from laptop workflows into servers or cloud environments.</p>
+                <a class="button button-secondary" href="./lessons/lesson-18.html">Open Lesson 18</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">19</span>
+                  <h3>Lesson 19: Reverse Proxy with Nginx</h3>
+                </div>
+                <p>Learn how Nginx often sits in front of app containers to handle incoming traffic and routing.</p>
+                <a class="button button-secondary" href="./lessons/lesson-19.html">Open Lesson 19</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-violet">20</span>
+                  <h3>Lesson 20: Full Stack Docker Apps</h3>
+                </div>
+                <p>Learn how frontend, backend, and database services fit together in one larger Docker setup.</p>
+                <a class="button button-secondary" href="./lessons/lesson-20.html">Open Lesson 20</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-orange">21</span>
+                  <h3>Lesson 21: Databases in Docker</h3>
+                </div>
+                <p>Learn how persistence, migrations, and backup thinking change database container usage.</p>
+                <a class="button button-secondary" href="./lessons/lesson-21.html">Open Lesson 21</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">22</span>
+                  <h3>Lesson 22: CI/CD with Docker</h3>
+                </div>
+                <p>Learn how Docker fits into automated build, test, and deployment workflows.</p>
+                <a class="button button-secondary" href="./lessons/lesson-22.html">Open Lesson 22</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">23</span>
+                  <h3>Lesson 23: Monitoring and Logs</h3>
+                </div>
+                <p>Learn why observation, logs, and runtime visibility matter after deployment.</p>
+                <a class="button button-secondary" href="./lessons/lesson-23.html">Open Lesson 23</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-violet">24</span>
+                  <h3>Lesson 24: Compose Advanced Patterns</h3>
+                </div>
+                <p>Learn how larger projects structure Compose files more cleanly across different environments.</p>
+                <a class="button button-secondary" href="./lessons/lesson-24.html">Open Lesson 24</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-orange">25</span>
+                  <h3>Lesson 25: Docker in Team Projects</h3>
+                </div>
+                <p>Learn how consistency, onboarding, and shared workflows make Docker more useful for teams.</p>
+                <a class="button button-secondary" href="./lessons/lesson-25.html">Open Lesson 25</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">26</span>
+                  <h3>Lesson 26: Introduction to Kubernetes</h3>
+                </div>
+                <p>Learn why teams move from single-host container workflows into orchestration when systems grow larger.</p>
+                <a class="button button-secondary" href="./lessons/lesson-26.html">Open Lesson 26</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">27</span>
+                  <h3>Lesson 27: Scaling Containers</h3>
+                </div>
+                <p>Learn why multiple replicas matter, how scaling changes traffic flow, and why state becomes more important.</p>
+                <a class="button button-secondary" href="./lessons/lesson-27.html">Open Lesson 27</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-violet">28</span>
+                  <h3>Lesson 28: Orchestration Concepts</h3>
+                </div>
+                <p>Learn the big ideas behind orchestration such as desired state, scheduling, recovery, and service discovery.</p>
+                <a class="button button-secondary" href="./lessons/lesson-28.html">Open Lesson 28</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-orange">29</span>
+                  <h3>Lesson 29: Production Hardening</h3>
+                </div>
+                <p>Learn how runtime security becomes stricter in production through least privilege, smaller surfaces, and better secret handling.</p>
+                <a class="button button-secondary" href="./lessons/lesson-29.html">Open Lesson 29</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">30</span>
+                  <h3>Lesson 30: Real-World Architectures</h3>
+                </div>
+                <p>Learn how Docker fits into larger deployment systems that include routing, storage, observability, scaling, and automation.</p>
+                <a class="button button-secondary" href="./lessons/lesson-30.html">Open Lesson 30</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-violet">R</span>
+                  <h3>Revision Page</h3>
+                </div>
+                <p>Use the recap section to test memory, review important terms, and see the next topics you should study after these foundations.</p>
+                <a class="button button-secondary" href="./revision.html">Open Revision</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-orange">S</span>
+                  <h3>Course Summary</h3>
+                </div>
+                <p>Use the final summary page to connect the full roadmap into one clean end-to-end Docker learning picture.</p>
+                <a class="button button-secondary" href="./course-summary.html">Open Summary</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-sea">G</span>
+                  <h3>Glossary</h3>
+                </div>
+                <p>Search key Docker terms quickly, then jump straight back into the lessons that use them in context.</p>
+                <a class="button button-secondary" href="./glossary.html">Open Glossary</a>
+              </article>
+              <article class="feature-card">
+                <div class="feature-top">
+                  <span class="feature-mark icon-mint">C</span>
+                  <h3>Certificate</h3>
+                </div>
+                <p>Unlock a final completion badge and printable certificate automatically when the full roadmap is completed.</p>
+                <a class="button button-secondary" href="./certificate.html">Open Certificate</a>
+              </article>
+            </div>
+          </section>
+
+          <p class="page-end">Docker Learning Hub • Multi-page mini learning site</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

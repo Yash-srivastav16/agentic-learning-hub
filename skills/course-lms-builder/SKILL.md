@@ -11,6 +11,8 @@ Build a polished, structured learning hub for a technology topic using the same 
 
 Prefer a static site with shared `styles.css` and `app.js` unless the user explicitly asks for a framework. Preserve an existing site's visual language when extending it. When starting from scratch, keep the experience premium, calm, structured, and clearly sequential.
 
+For larger or reusable course repos, prefer placing each course app inside `apps/<course-slug>/` and keeping lesson pages inside `apps/<course-slug>/lessons/` so the repo root stays focused on shared skills, docs, and app folders.
+
 ## Workflow
 
 ### 1. Clarify the course shape
@@ -26,14 +28,14 @@ If details are missing, make a reasonable sequential plan and state the assumpti
 ### 2. Plan the course architecture
 
 Default to this structure when the user wants a product-like learning site:
-- `index.html` for roadmap and overview
-- `lesson-N.html` pages for each lesson
-- `revision.html`
-- `course-summary.html`
-- `glossary.html`
-- `certificate.html`
-- shared `styles.css`
-- shared `app.js`
+- `apps/<course-slug>/index.html` for roadmap and overview
+- `apps/<course-slug>/lessons/lesson-N.html` pages for each lesson when the course is large enough that root-level clutter would hurt repo readability
+- `apps/<course-slug>/revision.html`
+- `apps/<course-slug>/course-summary.html`
+- `apps/<course-slug>/glossary.html`
+- `apps/<course-slug>/certificate.html`
+- shared `apps/<course-slug>/styles.css`
+- shared `apps/<course-slug>/app.js`
 
 Read `references/course-blueprint.md` before implementing the page map and LMS features.
 

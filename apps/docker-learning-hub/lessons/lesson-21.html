@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 21 | Working with Databases in Docker</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 21 • Working with databases in Docker</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 21</h2>
+            <p>This lesson focuses on the database concerns that become important when using Docker seriously in real applications.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-18.html"><span class="icon-badge icon-sea">18</span><span><strong>Lesson 18</strong>Deploying Docker apps</span></a>
+            <a class="sidebar-link" href="./lesson-19.html"><span class="icon-badge icon-mint">19</span><span><strong>Lesson 19</strong>Reverse proxy with Nginx</span></a>
+            <a class="sidebar-link" href="./lesson-20.html"><span class="icon-badge icon-violet">20</span><span><strong>Lesson 20</strong>Dockerizing full stack apps</span></a>
+            <a class="sidebar-link active" href="./lesson-21.html"><span class="icon-badge icon-orange">21</span><span><strong>Lesson 21</strong>Working with databases in Docker</span></a>
+            <a class="sidebar-link" href="./lesson-22.html"><span class="icon-badge icon-sea">22</span><span><strong>Lesson 22</strong>CI/CD with Docker</span></a>
+            <a class="sidebar-link" href="./lesson-23.html"><span class="icon-badge icon-mint">23</span><span><strong>Lesson 23</strong>Monitoring and logs</span></a>
+            <a class="sidebar-link" href="./lesson-24.html"><span class="icon-badge icon-violet">24</span><span><strong>Lesson 24</strong>Compose advanced patterns</span></a>
+            <a class="sidebar-link" href="./lesson-25.html"><span class="icon-badge icon-orange">25</span><span><strong>Lesson 25</strong>Docker in team projects</span></a>
+            <a class="sidebar-link" href="../revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 21</span>
+                <h1>Working with databases in Docker</h1>
+              </div>
+              <p>This page explains why databases must be treated more carefully than simple stateless app containers.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card"><div class="card-header"><div><h3>Persistence</h3></div></div><p>Database containers need durable storage because the data matters more than the container itself.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Readiness</h3></div></div><p>Databases often start more slowly than apps, so connection timing and health checks matter.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Recovery</h3></div></div><p>Volumes help persistence, but proper backups and migration planning are still separate responsibilities.</p></article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Database service flow</h3>
+                <div class="mini-stack">
+                  <div><strong>App container</strong></div>
+                  <div><strong>Database container</strong></div>
+                  <div><strong>Persistent volume</strong></div>
+                </div>
+              </article>
+              <article class="diagram-card">
+                <h3>Important distinction</h3>
+                <div class="mini-stack">
+                  <div><strong>Volume</strong> keeps data available</div>
+                  <div><strong>Backup</strong> helps you recover after failure</div>
+                  <div><strong>They are not the same thing</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Why databases are special in Docker</h3>
+                <ul>
+                  <li>They contain valuable persistent data.</li>
+                  <li>They often need initialization time.</li>
+                  <li>Schema changes usually require migrations.</li>
+                  <li>Upgrades must be handled with care.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Common database mistakes</h3>
+                <ul>
+                  <li>Running a database without a persistent volume.</li>
+                  <li>Thinking a volume automatically means “safe backup.”</li>
+                  <li>Letting the app hit the DB before it is ready.</li>
+                  <li>Changing schemas with no migration plan.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Compose example shape</h3>
+                <div class="code-box">
+                  <code>services:
+  app:
+  db:
+volumes:
+  db_data:</code>
+                </div>
+                <p>This structure shows the database as its own service plus a dedicated named volume for persistence.</p>
+              </article>
+              <article class="card">
+                <h3>Migration mindset</h3>
+                <p>A database is not only “running software.” It also holds a changing structure of tables and data, so deployment needs schema awareness too.</p>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Database memory guide</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Container is replaceable</strong><br />The database data should not be tied only to container life.</div>
+                <div class="layer"><strong>Volume keeps data across container changes</strong><br />This is the persistence layer.</div>
+                <div class="layer"><strong>Backup is still needed</strong><br />Persistence and recovery are different goals.</div>
+                <div class="layer"><strong>Readiness matters</strong><br />Apps often fail if they talk to the database too early.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 22 explains how Docker becomes part of automated CI/CD pipelines.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

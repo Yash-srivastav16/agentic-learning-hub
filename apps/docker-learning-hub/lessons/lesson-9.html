@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 9 | Docker Debugging</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🐳</span>
+          Docker Learning Hub
+        </div>
+        <span class="brand-sub">Lesson 9 • Docker debugging and troubleshooting</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 9</h2>
+            <p>This lesson teaches the practical checks you use when containers start failing, ports do not work, or services cannot connect.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html">
+              <span class="icon-badge icon-orange">O</span>
+              <span><strong>Overview</strong>Course landing and structure</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-1.html">
+              <span class="icon-badge icon-sea">1</span>
+              <span><strong>Lesson 1</strong>Docker basics and purpose</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-2.html">
+              <span class="icon-badge icon-mint">2</span>
+              <span><strong>Lesson 2</strong>Images, containers, and Dockerfile</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-3.html">
+              <span class="icon-badge icon-orange">3</span>
+              <span><strong>Lesson 3</strong>Build your first real Dockerized app</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-4.html">
+              <span class="icon-badge icon-sea">4</span>
+              <span><strong>Lesson 4</strong>Volumes and persistent data</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-5.html">
+              <span class="icon-badge icon-mint">5</span>
+              <span><strong>Lesson 5</strong>Networks and container communication</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-6.html">
+              <span class="icon-badge icon-violet">6</span>
+              <span><strong>Lesson 6</strong>Compose and multi-container setup</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-7.html">
+              <span class="icon-badge icon-orange">7</span>
+              <span><strong>Lesson 7</strong>Environment variables and configuration</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-8.html">
+              <span class="icon-badge icon-sea">8</span>
+              <span><strong>Lesson 8</strong>Build a small real Docker project</span>
+            </a>
+            <a class="sidebar-link active" href="./lesson-9.html">
+              <span class="icon-badge icon-mint">9</span>
+              <span><strong>Lesson 9</strong>Docker debugging and troubleshooting</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-10.html">
+              <span class="icon-badge icon-violet">10</span>
+              <span><strong>Lesson 10</strong>Health checks and readiness</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-11.html">
+              <span class="icon-badge icon-orange">11</span>
+              <span><strong>Lesson 11</strong>Docker image optimization</span>
+            </a>
+            <a class="sidebar-link" href="../revision.html">
+              <span class="icon-badge icon-violet">R</span>
+              <span><strong>Revision</strong>Quick review and next topics</span>
+            </a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 9</span>
+                <h1>Docker debugging and troubleshooting</h1>
+              </div>
+              <p>This page focuses on what to do when a container does not run correctly, when the browser cannot reach the app, or when services fail to talk to each other.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <circle cx="16" cy="16" r="8" fill="#0db7ed"></circle>
+                      <path d="M22 22l6 6" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>First habit</h3></div>
+                </div>
+                <p>Do not guess first. Check container status, logs, ports, and service names before changing things.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="7" y="9" width="22" height="18" rx="4" fill="#10b981"></rect>
+                      <path d="M12 15h12M12 20h9" stroke="#fff" stroke-width="2.1" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main tools</h3></div>
+                </div>
+                <p><code>docker ps</code>, <code>docker logs</code>, <code>docker exec</code>, and <code>docker inspect</code> solve many beginner issues.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <path d="M18 8 28 26H8Z" fill="#7c3aed"></path>
+                      <path d="M18 14v5M18 23h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Common causes</h3></div>
+                </div>
+                <p>Most Docker problems come from wrong ports, wrong env vars, wrong file copies, wrong host names, or missing rebuilds.</p>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Most useful commands</h3>
+                <div class="terminal">
+                  <code>docker ps
+docker ps -a
+docker logs &lt;container_id&gt;
+docker exec -it &lt;container_id&gt; sh
+docker inspect &lt;container_id&gt;</code>
+                </div>
+              </article>
+
+              <article class="card">
+                <h3>Best beginner debugging flow</h3>
+                <div class="layer-list">
+                  <div class="layer"><strong>Step 1</strong><br />Run <code>docker ps -a</code> to check whether the container is actually running or already exited.</div>
+                  <div class="layer"><strong>Step 2</strong><br />Run <code>docker logs</code> to read the startup error.</div>
+                  <div class="layer"><strong>Step 3</strong><br />Check port mapping and app port.</div>
+                  <div class="layer"><strong>Step 4</strong><br />Go inside the container if needed and inspect files or environment variables.</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>When the app is not opening</h3>
+                <div class="mini-stack">
+                  <div><strong>Is the container running?</strong></div>
+                  <div><strong>Is the port mapping correct?</strong></div>
+                  <div><strong>Is the app listening on the same internal port?</strong></div>
+                  <div><strong>Are you opening the correct browser URL?</strong></div>
+                </div>
+              </article>
+
+              <article class="diagram-card">
+                <h3>When app cannot reach the database</h3>
+                <div class="mini-stack">
+                  <div><strong>Are both containers running?</strong></div>
+                  <div><strong>Are they on the same network?</strong></div>
+                  <div><strong>Is the host name the service name like `db`?</strong></div>
+                  <div><strong>Avoid using `localhost` for another container</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Common environment variable issue</h3>
+                <div class="code-box">
+                  <code>process.env.DB_HOST
+
+environment:
+  DATABASE_HOST: db</code>
+                </div>
+                <p>This fails because the app expects <code>DB_HOST</code>, but Compose sends <code>DATABASE_HOST</code>. The names must match exactly.</p>
+              </article>
+
+              <article class="card">
+                <h3>Check variables inside a container</h3>
+                <div class="terminal">
+                  <code>docker exec -it &lt;container_id&gt; sh
+env</code>
+                </div>
+                <p>This helps confirm whether the expected values were really passed into the running container.</p>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>When files are missing</h3>
+                <div class="terminal">
+                  <code>docker exec -it &lt;container_id&gt; sh
+ls /app</code>
+                </div>
+                <p>If the expected files are not present, check your <code>COPY</code> commands and build context in the Dockerfile.</p>
+              </article>
+
+              <article class="card">
+                <h3>When changes are not showing</h3>
+                <div class="terminal">
+                  <code>docker compose up --build</code>
+                </div>
+                <p>If you changed code or the Dockerfile, you may still be running an old image. Rebuild before testing again.</p>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Compose debugging commands</h3>
+              <div class="code-box">
+                <code>docker compose ps
+docker compose logs
+docker compose logs app
+docker compose up --build
+docker compose down</code>
+              </div>
+            </article>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Volume debugging</h3>
+                <ul>
+                  <li>Check whether the volume is mounted to the right path.</li>
+                  <li>Check whether the app writes to that exact mounted folder.</li>
+                  <li>Wrong path means the volume will not help.</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Network debugging</h3>
+                <ul>
+                  <li>Check service names and network membership.</li>
+                  <li>Use service names like <code>db</code> instead of changing IPs.</li>
+                  <li>Inside a container, <code>localhost</code> means that same container.</li>
+                </ul>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>What you learned in Lesson 9</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Debugging starts with facts</strong><br />Check status and logs before changing Docker files or application code.</div>
+                <div class="layer"><strong>Most issues repeat</strong><br />Wrong ports, wrong env vars, wrong service names, and missing rebuilds are very common.</div>
+                <div class="layer"><strong>Container inspection is practical</strong><br />Going inside the container helps verify files, paths, and runtime values.</div>
+                <div class="layer"><strong>Compose has its own useful checks</strong><br />Service logs and Compose status make multi-container debugging easier.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next step: after debugging basics, you are ready for more advanced topics like health checks, production patterns, and deployment workflows.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

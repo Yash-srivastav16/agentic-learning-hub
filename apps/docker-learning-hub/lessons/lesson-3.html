@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 3 | Build Your First Real Dockerized App</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🐳</span>
+          Docker Learning Hub
+        </div>
+        <span class="brand-sub">Lesson 3 • Build your first real Dockerized app</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 3</h2>
+            <p>This lesson turns the first two lessons into a real hands-on workflow from app files to running container.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html">
+              <span class="icon-badge icon-orange">O</span>
+              <span><strong>Overview</strong>Course landing and structure</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-1.html">
+              <span class="icon-badge icon-sea">1</span>
+              <span><strong>Lesson 1</strong>Docker basics and purpose</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-2.html">
+              <span class="icon-badge icon-mint">2</span>
+              <span><strong>Lesson 2</strong>Images, containers, and Dockerfile</span>
+            </a>
+            <a class="sidebar-link active" href="./lesson-3.html">
+              <span class="icon-badge icon-orange">3</span>
+              <span><strong>Lesson 3</strong>Build your first real Dockerized app</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-4.html">
+              <span class="icon-badge icon-sea">4</span>
+              <span><strong>Lesson 4</strong>Volumes and persistent data</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-5.html">
+              <span class="icon-badge icon-mint">5</span>
+              <span><strong>Lesson 5</strong>Networks and container communication</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-6.html">
+              <span class="icon-badge icon-violet">6</span>
+              <span><strong>Lesson 6</strong>Compose and multi-container setup</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-7.html">
+              <span class="icon-badge icon-orange">7</span>
+              <span><strong>Lesson 7</strong>Environment variables and configuration</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-8.html">
+              <span class="icon-badge icon-sea">8</span>
+              <span><strong>Lesson 8</strong>Build a small real Docker project</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-9.html">
+              <span class="icon-badge icon-mint">9</span>
+              <span><strong>Lesson 9</strong>Docker debugging and troubleshooting</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-10.html">
+              <span class="icon-badge icon-violet">10</span>
+              <span><strong>Lesson 10</strong>Health checks and readiness</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-11.html">
+              <span class="icon-badge icon-orange">11</span>
+              <span><strong>Lesson 11</strong>Docker image optimization</span>
+            </a>
+            <a class="sidebar-link" href="../revision.html">
+              <span class="icon-badge icon-violet">R</span>
+              <span><strong>Revision</strong>Quick review and next topics</span>
+            </a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 3</span>
+                <h1>Build your first real Dockerized app</h1>
+              </div>
+              <p>This page uses a small Node.js app so you can see the full Docker workflow clearly: create files, write a Dockerfile, build an image, run a container, and test it.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="6" y="8" width="24" height="20" rx="6" fill="#0db7ed"></rect>
+                      <path d="M12 14h12M12 19h12M12 24h7" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Goal</h3></div>
+                </div>
+                <p>Package a tiny web app so it runs the same way anywhere Docker is installed.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="5" y="9" width="26" height="18" rx="8" fill="#10b981"></rect>
+                      <circle cx="14" cy="18" r="3" fill="#fff"></circle>
+                      <circle cx="22" cy="18" r="3" fill="#fff"></circle>
+                    </svg>
+                  </span>
+                  <div><h3>Result</h3></div>
+                </div>
+                <p>You will understand the full end-to-end flow, not just separate commands.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <path d="M10 6h11l7 7v15a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4Z" fill="#7c3aed"></path>
+                      <path d="M21 6v7h7" fill="none" stroke="#fff" stroke-width="2"></path>
+                    </svg>
+                  </span>
+                  <div><h3>What changes now</h3></div>
+                </div>
+                <p>You move from theory into a practical example with realistic files and commands.</p>
+              </article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Step-by-step flow</h3>
+                <div class="flow-lane">
+                  <div class="flow-step"><strong>1. Write app files</strong>Create a tiny Node.js server and package file.</div>
+                  <div class="arrow"></div>
+                  <div class="flow-step"><strong>2. Write Dockerfile</strong>Tell Docker how to package the app.</div>
+                  <div class="arrow"></div>
+                  <div class="flow-step"><strong>3. Build image</strong>Turn the project into a reusable image.</div>
+                  <div class="arrow"></div>
+                  <div class="flow-step"><strong>4. Run container</strong>Start the app and test it in the browser.</div>
+                </div>
+              </article>
+
+              <article class="diagram-card">
+                <h3>Project files</h3>
+                <div class="mini-stack">
+                  <div><strong>server.js</strong><br />The app code that returns a simple response.</div>
+                  <div><strong>package.json</strong><br />The Node.js metadata and start command.</div>
+                  <div><strong>Dockerfile</strong><br />The instructions Docker uses to build the image.</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Example `server.js`</h3>
+                <div class="code-box">
+                  <code>const http = require("http");
+
+const server = http.createServer((req, res) =&gt; {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Hello from Docker Lesson 3");
+});
+
+server.listen(3000, () =&gt; {
+  console.log("Server running on port 3000");
+});</code>
+                </div>
+              </article>
+
+              <article class="card">
+                <h3>Example `package.json`</h3>
+                <div class="code-box">
+                  <code>{
+  "name": "docker-lesson-3-app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}</code>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Dockerfile for this app</h3>
+                <div class="code-box">
+                  <code>FROM node:18
+WORKDIR /app
+COPY package.json /app
+COPY server.js /app
+EXPOSE 3000
+CMD ["npm", "start"]</code>
+                </div>
+                <div class="callout">
+                  This uses Node 18 as the base image, copies the app files into the container, exposes port 3000, and starts the app with `npm start`.
+                </div>
+              </article>
+
+              <article class="card">
+                <h3>Why this Dockerfile is beginner-friendly</h3>
+                <ul>
+                  <li>It is short enough to understand line by line.</li>
+                  <li>It shows `FROM`, `WORKDIR`, `COPY`, `EXPOSE`, and `CMD` in one place.</li>
+                  <li>It connects directly to what you learned in Lesson 2.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Build and run commands</h3>
+                <div class="terminal">
+                  <code>docker build -t lesson-3-app .
+docker run -d -p 3000:3000 lesson-3-app
+docker ps</code>
+                </div>
+                <p>After this, you can open <code>http://localhost:3000</code> in your browser.</p>
+              </article>
+
+              <article class="card">
+                <h3>How to verify it worked</h3>
+                <ul>
+                  <li>Check that `docker ps` shows your running container.</li>
+                  <li>Open the browser and confirm the app response appears.</li>
+                  <li>Use `docker logs &lt;container_id&gt;` if something does not work.</li>
+                  <li>Use `docker stop &lt;container_id&gt;` when you want to stop it.</li>
+                </ul>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>What you learned in Lesson 3</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>App files matter first</strong><br />Docker packages a real app, not just commands.</div>
+                <div class="layer"><strong>Dockerfile connects code to image</strong><br />It turns your project into a reusable package.</div>
+                <div class="layer"><strong>Image becomes container</strong><br />The container is the running version of the packaged app.</div>
+                <div class="layer"><strong>Testing closes the loop</strong><br />You should always verify the app actually runs after `docker run`.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 4 explains how Docker keeps important data safe using volumes.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

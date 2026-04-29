@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 1 | Docker Basics</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🐳</span>
+          Docker Learning Hub
+        </div>
+        <span class="brand-sub">Lesson 1 • Docker basics</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 1</h2>
+            <p>This lesson is about understanding Docker before trying to memorize commands.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html">
+              <span class="icon-badge icon-orange">O</span>
+              <span><strong>Overview</strong>Course landing and structure</span>
+            </a>
+            <a class="sidebar-link active" href="./lesson-1.html">
+              <span class="icon-badge icon-sea">1</span>
+              <span><strong>Lesson 1</strong>What Docker is and why it matters</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-2.html">
+              <span class="icon-badge icon-mint">2</span>
+              <span><strong>Lesson 2</strong>Build flow and Dockerfile</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-3.html">
+              <span class="icon-badge icon-orange">3</span>
+              <span><strong>Lesson 3</strong>Build your first real Dockerized app</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-4.html">
+              <span class="icon-badge icon-sea">4</span>
+              <span><strong>Lesson 4</strong>Volumes and persistent data</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-5.html">
+              <span class="icon-badge icon-mint">5</span>
+              <span><strong>Lesson 5</strong>Networks and container communication</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-6.html">
+              <span class="icon-badge icon-violet">6</span>
+              <span><strong>Lesson 6</strong>Compose and multi-container setup</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-7.html">
+              <span class="icon-badge icon-orange">7</span>
+              <span><strong>Lesson 7</strong>Environment variables and configuration</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-8.html">
+              <span class="icon-badge icon-sea">8</span>
+              <span><strong>Lesson 8</strong>Build a small real Docker project</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-9.html">
+              <span class="icon-badge icon-mint">9</span>
+              <span><strong>Lesson 9</strong>Docker debugging and troubleshooting</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-10.html">
+              <span class="icon-badge icon-violet">10</span>
+              <span><strong>Lesson 10</strong>Health checks and readiness</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-11.html">
+              <span class="icon-badge icon-orange">11</span>
+              <span><strong>Lesson 11</strong>Docker image optimization</span>
+            </a>
+            <a class="sidebar-link" href="../revision.html">
+              <span class="icon-badge icon-violet">R</span>
+              <span><strong>Revision</strong>Recall and practice</span>
+            </a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 1</span>
+                <h1>Docker basics in plain language</h1>
+              </div>
+              <p>This page focuses on the beginner questions first: what Docker is, why we use it, and how it helps keep apps consistent.</p>
+            </div>
+
+            <div class="section-grid">
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="4" y="8" width="28" height="20" rx="7" fill="#d56829"></rect>
+                      <path d="M18 8v20M8 14h20" stroke="#fff2e7" stroke-width="2"></path>
+                    </svg>
+                  </span>
+                  <div><h3>What is Docker?</h3></div>
+                </div>
+                <p>Docker is a tool that packages an application and the things it depends on so it can run the same way on different machines.</p>
+                <div class="callout">
+                  <strong>Layman version:</strong> Docker is like packing the full app setup into one ready-to-use box instead of carrying separate pieces.
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <circle cx="18" cy="18" r="13" fill="#2f819d" opacity="0.18"></circle>
+                      <circle cx="18" cy="18" r="9" fill="#2f819d"></circle>
+                      <circle cx="18" cy="18" r="4" fill="#fff"></circle>
+                    </svg>
+                  </span>
+                  <div><h3>Why Docker is useful</h3></div>
+                </div>
+                <ul>
+                  <li>It reduces setup differences between systems.</li>
+                  <li>It avoids the “it works on my machine” problem.</li>
+                  <li>It keeps project dependencies separate.</li>
+                  <li>It makes development and deployment more predictable.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Basic Docker flow</h3>
+                <div class="flow-lane">
+                  <div class="flow-step"><strong>1. Write app</strong>Add your project files and code.</div>
+                  <div class="arrow"></div>
+                  <div class="flow-step"><strong>2. Define setup</strong>Describe how the app should be packaged.</div>
+                  <div class="arrow"></div>
+                  <div class="flow-step"><strong>3. Build image</strong>Create a reusable blueprint.</div>
+                  <div class="arrow"></div>
+                  <div class="flow-step"><strong>4. Run container</strong>Start the app in its own environment.</div>
+                </div>
+              </article>
+
+              <article class="diagram-card">
+                <h3>Image and container relationship</h3>
+                <div class="mini-stack">
+                  <div><strong>Image</strong><br />The blueprint or template.</div>
+                  <div><strong>Container</strong><br />The running instance created from that image.</div>
+                  <div><strong>Simple memory trick</strong><br />Image = recipe, Container = cooked dish.</div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="8" y="16" width="20" height="14" rx="5" fill="#4b9978"></rect>
+                      <path d="M12 16v-3a6 6 0 0 1 12 0v3" fill="none" stroke="#fff" stroke-width="2.4"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Why isolation matters</h3></div>
+                </div>
+                <p>Containers run in separate environments, so different apps can use different versions of software on the same machine without clashing.</p>
+              </article>
+
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <circle cx="18" cy="18" r="12" fill="#8765bc"></circle>
+                      <path d="M8 18h20M18 6a19 19 0 0 1 0 24M18 6a19 19 0 0 0 0 24" stroke="#fff" stroke-width="2"></path>
+                    </svg>
+                  </span>
+                  <div><h3>How port mapping works</h3></div>
+                </div>
+                <p>When you write <code>-p 8080:80</code>, traffic coming to your machine on port 8080 is sent into the container on port 80.</p>
+              </article>
+            </div>
+
+            <div class="compare" style="margin-top: 16px;">
+              <div class="compare-card vm">
+                <h3>Virtual Machine</h3>
+                <ul>
+                  <li>Full guest OS</li>
+                  <li>Heavier and slower</li>
+                  <li>More memory usage</li>
+                </ul>
+              </div>
+              <div class="compare-card docker">
+                <h3>Docker Container</h3>
+                <ul>
+                  <li>App plus dependencies</li>
+                  <li>Lighter and faster</li>
+                  <li>Shares host OS kernel</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="terminal">
+              <code>docker --version
+docker pull nginx
+docker run -d -p 8080:80 nginx
+docker ps
+docker ps -a
+docker stop &lt;container_id&gt;
+docker rm &lt;container_id&gt;
+docker images</code>
+            </div>
+          </section>
+
+          <p class="page-end">Next page: Lesson 2 covers images, containers, and Dockerfile in more depth.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

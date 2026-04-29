@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 7 | Environment Variables</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🐳</span>
+          Docker Learning Hub
+        </div>
+        <span class="brand-sub">Lesson 7 • Environment variables and configuration</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 7</h2>
+            <p>This lesson explains how to pass configuration like ports, database hosts, and secrets into containers without hardcoding them in the code.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html">
+              <span class="icon-badge icon-orange">O</span>
+              <span><strong>Overview</strong>Course landing and structure</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-1.html">
+              <span class="icon-badge icon-sea">1</span>
+              <span><strong>Lesson 1</strong>Docker basics and purpose</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-2.html">
+              <span class="icon-badge icon-mint">2</span>
+              <span><strong>Lesson 2</strong>Images, containers, and Dockerfile</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-3.html">
+              <span class="icon-badge icon-orange">3</span>
+              <span><strong>Lesson 3</strong>Build your first real Dockerized app</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-4.html">
+              <span class="icon-badge icon-sea">4</span>
+              <span><strong>Lesson 4</strong>Volumes and persistent data</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-5.html">
+              <span class="icon-badge icon-mint">5</span>
+              <span><strong>Lesson 5</strong>Networks and container communication</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-6.html">
+              <span class="icon-badge icon-violet">6</span>
+              <span><strong>Lesson 6</strong>Compose and multi-container setup</span>
+            </a>
+            <a class="sidebar-link active" href="./lesson-7.html">
+              <span class="icon-badge icon-orange">7</span>
+              <span><strong>Lesson 7</strong>Environment variables and configuration</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-8.html">
+              <span class="icon-badge icon-sea">8</span>
+              <span><strong>Lesson 8</strong>Build a small real Docker project</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-9.html">
+              <span class="icon-badge icon-mint">9</span>
+              <span><strong>Lesson 9</strong>Docker debugging and troubleshooting</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-10.html">
+              <span class="icon-badge icon-violet">10</span>
+              <span><strong>Lesson 10</strong>Health checks and readiness</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-11.html">
+              <span class="icon-badge icon-orange">11</span>
+              <span><strong>Lesson 11</strong>Docker image optimization</span>
+            </a>
+            <a class="sidebar-link" href="../revision.html">
+              <span class="icon-badge icon-violet">R</span>
+              <span><strong>Revision</strong>Quick review and next topics</span>
+            </a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 7</span>
+                <h1>Environment variables and app configuration</h1>
+              </div>
+              <p>This page explains how Docker containers receive configurable values like app port, database host, and runtime mode without changing the source code itself.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="6" y="8" width="24" height="20" rx="6" fill="#0db7ed"></rect>
+                      <path d="M12 14h12M12 19h8M12 24h5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main idea</h3></div>
+                </div>
+                <p>Environment variables are values passed into an app from outside the code.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <circle cx="18" cy="18" r="12" fill="#10b981"></circle>
+                      <path d="M14 18h8M18 14v8" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main use</h3></div>
+                </div>
+                <p>They help you change configuration for development, testing, and production without rewriting the application.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <path d="M18 8a7 7 0 0 1 7 7v2h1a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3h1v-2a7 7 0 0 1 7-7Z" fill="#7c3aed"></path>
+                      <circle cx="18" cy="21" r="2.2" fill="#fff"></circle>
+                    </svg>
+                  </span>
+                  <div><h3>Main warning</h3></div>
+                </div>
+                <p>Secrets like passwords and API keys should be handled carefully, even when using environment variables.</p>
+              </article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Hardcoded config</h3>
+                <div class="mini-stack">
+                  <div><strong>Value written inside code</strong></div>
+                  <div><strong>Harder to change across environments</strong></div>
+                  <div><strong>Less flexible for teams</strong></div>
+                </div>
+              </article>
+
+              <article class="diagram-card">
+                <h3>Environment-based config</h3>
+                <div class="mini-stack">
+                  <div><strong>Value comes from outside code</strong></div>
+                  <div><strong>Easy to change per environment</strong></div>
+                  <div><strong>Cleaner deployment workflow</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Common examples</h3>
+                <div class="code-box">
+                  <code>PORT=3000
+DB_HOST=db
+DB_USER=root
+DB_PASSWORD=secret123
+NODE_ENV=development</code>
+                </div>
+              </article>
+
+              <article class="card">
+                <h3>Why this matters</h3>
+                <p>The same app can use different ports, databases, or runtime modes depending on where it runs, without changing the source code.</p>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Using `docker run`</h3>
+                <div class="terminal">
+                  <code>docker run -d -p 3000:3000 \
+  -e PORT=3000 \
+  -e NODE_ENV=development \
+  my-app</code>
+                </div>
+              </article>
+
+              <article class="card">
+                <h3>Using Compose</h3>
+                <div class="code-box">
+                  <code>services:
+  app:
+    build: .
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      NODE_ENV: development</code>
+                </div>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Full Compose example with environment variables</h3>
+              <div class="code-box">
+                <code>services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      NODE_ENV: development
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass</code>
+              </div>
+              <div class="callout">
+                In this setup, the app gets its port, database host, and mode from environment variables rather than from hardcoded values.
+              </div>
+            </article>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>What about `.env` files?</h3>
+                <div class="code-box">
+                  <code>PORT=3000
+DB_HOST=db
+DB_USER=root
+DB_PASSWORD=secret123
+NODE_ENV=development</code>
+                </div>
+                <p>A `.env` file can keep configuration values in one place, which makes Compose files cleaner and easier to maintain.</p>
+              </article>
+
+              <article class="card">
+                <h3>Common beginner mistakes</h3>
+                <ul>
+                  <li>Hardcoding values directly into code</li>
+                  <li>Using the wrong variable name</li>
+                  <li>Putting secrets in public places carelessly</li>
+                  <li>Using `localhost` for another container instead of the service name</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>How Compose uses `.env`</h3>
+                <div class="code-box">
+                  <code>services:
+  app:
+    build: .
+    ports:
+      - "${PORT}:3000"
+    environment:
+      PORT: ${PORT}
+      DB_HOST: ${DB_HOST}
+      NODE_ENV: ${NODE_ENV}</code>
+                </div>
+                <p>Here, Compose reads values from the `.env` file and replaces placeholders like <code>${PORT}</code> before starting the service.</p>
+              </article>
+
+              <article class="card">
+                <h3>How app code reads variables</h3>
+                <div class="code-box">
+                  <code>const port = process.env.PORT || 3000;
+const dbHost = process.env.DB_HOST;</code>
+                </div>
+                <p>This is how a Node.js app reads configuration that Docker passes into the container at runtime.</p>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>`.env` workflow summary</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Step 1</strong><br />Store values like <code>PORT=3000</code> and <code>DB_HOST=db</code> inside a `.env` file.</div>
+                <div class="layer"><strong>Step 2</strong><br />Reference them inside Compose using syntax like <code>${PORT}</code>.</div>
+                <div class="layer"><strong>Step 3</strong><br />Let the app read them through code like <code>process.env.PORT</code>.</div>
+                <div class="layer"><strong>Step 4</strong><br />Keep real secrets out of public repositories and handle them carefully.</div>
+              </div>
+            </article>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>What you learned in Lesson 7</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Environment variables separate code from configuration</strong><br />The app code can stay the same while values change per environment.</div>
+                <div class="layer"><strong>Docker can inject values at runtime</strong><br />Both `docker run` and Compose support environment-based configuration.</div>
+                <div class="layer"><strong>Compose becomes more useful with config</strong><br />You can combine services, volumes, networks, and environment settings together.</div>
+                <div class="layer"><strong>Secrets still need care</strong><br />Environment variables help, but sensitive values should still be handled responsibly.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 8 combines Dockerfile, Compose, volumes, networks, and configuration in one small real Docker project.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

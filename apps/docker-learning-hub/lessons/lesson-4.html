@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 4 | Docker Volumes</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🐳</span>
+          Docker Learning Hub
+        </div>
+        <span class="brand-sub">Lesson 4 • Volumes and persistent data</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 4</h2>
+            <p>This lesson explains why container data can disappear and how volumes help you keep important data safe.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html">
+              <span class="icon-badge icon-orange">O</span>
+              <span><strong>Overview</strong>Course landing and structure</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-1.html">
+              <span class="icon-badge icon-sea">1</span>
+              <span><strong>Lesson 1</strong>Docker basics and purpose</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-2.html">
+              <span class="icon-badge icon-mint">2</span>
+              <span><strong>Lesson 2</strong>Images, containers, and Dockerfile</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-3.html">
+              <span class="icon-badge icon-orange">3</span>
+              <span><strong>Lesson 3</strong>Build your first real Dockerized app</span>
+            </a>
+            <a class="sidebar-link active" href="./lesson-4.html">
+              <span class="icon-badge icon-sea">4</span>
+              <span><strong>Lesson 4</strong>Volumes and persistent data</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-5.html">
+              <span class="icon-badge icon-mint">5</span>
+              <span><strong>Lesson 5</strong>Networks and container communication</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-6.html">
+              <span class="icon-badge icon-violet">6</span>
+              <span><strong>Lesson 6</strong>Compose and multi-container setup</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-7.html">
+              <span class="icon-badge icon-orange">7</span>
+              <span><strong>Lesson 7</strong>Environment variables and configuration</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-8.html">
+              <span class="icon-badge icon-sea">8</span>
+              <span><strong>Lesson 8</strong>Build a small real Docker project</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-9.html">
+              <span class="icon-badge icon-mint">9</span>
+              <span><strong>Lesson 9</strong>Docker debugging and troubleshooting</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-10.html">
+              <span class="icon-badge icon-violet">10</span>
+              <span><strong>Lesson 10</strong>Health checks and readiness</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-11.html">
+              <span class="icon-badge icon-orange">11</span>
+              <span><strong>Lesson 11</strong>Docker image optimization</span>
+            </a>
+            <a class="sidebar-link" href="../revision.html">
+              <span class="icon-badge icon-violet">R</span>
+              <span><strong>Revision</strong>Quick review and next topics</span>
+            </a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 4</span>
+                <h1>Docker volumes and persistent data</h1>
+              </div>
+              <p>This page answers one of the most important beginner questions: what happens to data when a container is removed, and how do volumes solve that problem?</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <ellipse cx="18" cy="11" rx="10" ry="5" fill="#0db7ed"></ellipse>
+                      <path d="M8 11v10c0 2.8 4.5 5 10 5s10-2.2 10-5V11" fill="#0db7ed" opacity="0.85"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main problem</h3></div>
+                </div>
+                <p>Container storage is not something you should depend on for important long-term data.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="7" y="10" width="22" height="16" rx="7" fill="#10b981"></rect>
+                      <path d="M12 18h12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main solution</h3></div>
+                </div>
+                <p>A Docker volume stores data separately from the container so the data can remain even when the container changes.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <circle cx="18" cy="18" r="12" fill="#7c3aed"></circle>
+                      <path d="M14 18h8M18 14v8" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main result</h3></div>
+                </div>
+                <p>Your app can be replaced or restarted without automatically losing useful stored data.</p>
+              </article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Without a volume</h3>
+                <div class="mini-stack">
+                  <div><strong>Container stores data inside itself</strong></div>
+                  <div><strong>Container gets removed</strong></div>
+                  <div><strong>Data may disappear with it</strong></div>
+                </div>
+              </article>
+
+              <article class="diagram-card">
+                <h3>With a volume</h3>
+                <div class="mini-stack">
+                  <div><strong>Container writes data to a volume</strong></div>
+                  <div><strong>Container gets removed</strong></div>
+                  <div><strong>Volume still remains with the data</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>What is a Docker volume?</h3>
+                <p>A Docker volume is a Docker-managed storage area used to keep persistent data outside the container’s temporary writable layer.</p>
+                <div class="callout">
+                  Simple memory line: containers run apps, volumes keep data.
+                </div>
+              </article>
+
+              <article class="card">
+                <h3>Layman example</h3>
+                <p>Think of a container like a hotel room and a volume like a locker outside that room. You can leave the room, but the locker can still keep your things.</p>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Create and inspect a volume</h3>
+                <div class="terminal">
+                  <code>docker volume create mydata
+docker volume ls
+docker volume inspect mydata</code>
+                </div>
+              </article>
+
+              <article class="card">
+                <h3>Mount a volume into a container</h3>
+                <div class="terminal">
+                  <code>docker run -d -v mydata:/app/data nginx</code>
+                </div>
+                <p>This connects the Docker volume named <code>mydata</code> to the folder <code>/app/data</code> inside the container.</p>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Named volume vs bind mount</h3>
+                <div class="layer-list">
+                  <div class="layer"><strong>Named volume</strong><br />Managed by Docker, good for persistent application data.</div>
+                  <div class="layer"><strong>Bind mount</strong><br />Maps a real folder from your computer into the container, useful in development.</div>
+                </div>
+              </article>
+
+              <article class="card">
+                <h3>Examples</h3>
+                <div class="code-box">
+                  <code>-v mydata:/app/data
+-v /Users/yourname/project:/app</code>
+                </div>
+                <p>The first is a named volume. The second is a bind mount from the host machine.</p>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Persistence example</h3>
+              <div class="terminal">
+                <code>docker volume create notes_data
+docker run -it --name notes-box -v notes_data:/data busybox sh
+
+echo "Hello volume" &gt; /data/notes.txt
+exit
+
+docker rm notes-box
+docker run -it --name notes-box-2 -v notes_data:/data busybox sh
+cat /data/notes.txt</code>
+              </div>
+              <div class="callout">
+                If you still see <code>Hello volume</code> in the second container, that proves the data stayed in the volume and not only in the first container.
+              </div>
+            </article>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>What you learned in Lesson 4</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Container data is not the same as persistent storage</strong><br />Important data should not depend only on the container layer.</div>
+                <div class="layer"><strong>Volumes protect useful data</strong><br />They stay separate from the container lifecycle.</div>
+                <div class="layer"><strong>Named volumes and bind mounts are different</strong><br />One is Docker-managed, the other uses a host folder directly.</div>
+                <div class="layer"><strong>Persistence is critical for real apps</strong><br />Databases, uploads, and saved files often rely on volumes.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 5 explains how containers communicate through Docker networks.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

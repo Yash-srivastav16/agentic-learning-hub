@@ -3,14 +3,14 @@
 ## Default product shape
 
 Use this shape when building a polished LMS-style course site:
-- `index.html` roadmap / landing page
-- one lesson page per lesson
-- `revision.html`
-- `course-summary.html`
-- `glossary.html`
-- `certificate.html`
-- shared `styles.css`
-- shared `app.js`
+- `apps/<course-slug>/index.html` roadmap / landing page
+- `apps/<course-slug>/lessons/lesson-N.html` for lesson pages in larger course repos
+- `apps/<course-slug>/revision.html`
+- `apps/<course-slug>/course-summary.html`
+- `apps/<course-slug>/glossary.html`
+- `apps/<course-slug>/certificate.html`
+- shared `apps/<course-slug>/styles.css`
+- shared `apps/<course-slug>/app.js`
 
 ## Shared LMS features
 

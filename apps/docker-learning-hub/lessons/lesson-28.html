@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 28 | Container Orchestration Concepts</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 28 • Container orchestration concepts</span>
+      </header>
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 28</h2>
+            <p>This lesson introduces the big orchestration ideas that appear once containers are distributed, scaled, and managed automatically.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-26.html"><span class="icon-badge icon-sea">26</span><span><strong>Lesson 26</strong>Introduction to Kubernetes</span></a>
+            <a class="sidebar-link" href="./lesson-27.html"><span class="icon-badge icon-mint">27</span><span><strong>Lesson 27</strong>Scaling containers</span></a>
+            <a class="sidebar-link active" href="./lesson-28.html"><span class="icon-badge icon-violet">28</span><span><strong>Lesson 28</strong>Container orchestration concepts</span></a>
+            <a class="sidebar-link" href="./lesson-29.html"><span class="icon-badge icon-orange">29</span><span><strong>Lesson 29</strong>Production security and hardening</span></a>
+            <a class="sidebar-link" href="./lesson-30.html"><span class="icon-badge icon-sea">30</span><span><strong>Lesson 30</strong>Real-world deployment architectures</span></a>
+            <a class="sidebar-link" href="../revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 28</span>
+                <h1>Container orchestration concepts</h1>
+              </div>
+              <p>This page explains the key ideas behind automated container management: scheduling, recovery, service discovery, and desired state.</p>
+            </div>
+            <div class="three-up">
+              <article class="card"><div class="card-header"><div><h3>Scheduling</h3></div></div><p>A scheduler decides where workloads should run so available machines are used in a more balanced and reliable way.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Recovery</h3></div></div><p>Orchestration systems notice failure and try to restore the intended application state automatically.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Service discovery</h3></div></div><p>Applications need stable ways to find and talk to each other even when underlying containers change.</p></article>
+            </div>
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Desired state model</h3>
+                <div class="mini-stack">
+                  <div><strong>You declare target state</strong></div>
+                  <div><strong>The platform compares reality</strong></div>
+                  <div><strong>It works to close the gap</strong></div>
+                </div>
+              </article>
+              <article class="diagram-card">
+                <h3>Orchestration loop</h3>
+                <div class="mini-stack">
+                  <div><strong>Observe</strong></div>
+                  <div><strong>Decide</strong></div>
+                  <div><strong>Act</strong></div>
+                </div>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Main orchestration responsibilities</h3>
+                <ul>
+                  <li>Placing workloads on available machines.</li>
+                  <li>Replacing failed containers.</li>
+                  <li>Maintaining the intended replica count.</li>
+                  <li>Providing stable network identities for services.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Why this matters beyond Docker basics</h3>
+                <ul>
+                  <li>Single-host commands stop being enough.</li>
+                  <li>Manual recovery becomes too slow and unreliable.</li>
+                  <li>Clusters need coordinated behavior.</li>
+                  <li>Applications need resilient runtime patterns.</li>
+                </ul>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Simple comparison</h3>
+                <div class="code-box">
+                  <code>Docker commands = direct control
+Orchestration = policy-driven control</code>
+                </div>
+                <p>You move from “I start this container now” toward “this application should always have three healthy replicas.”</p>
+              </article>
+              <article class="card">
+                <h3>Common beginner mistake</h3>
+                <p>Thinking orchestration is only about scaling, when it also includes placement, recovery, networking, rollout behavior, and service identity.</p>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Why service discovery matters</h3>
+                <p>If containers come and go often, applications need stable ways to find each other without depending on temporary container IDs or changing IP addresses.</p>
+              </article>
+              <article class="card">
+                <h3>Why scheduling matters</h3>
+                <p>A scheduler helps decide where application pieces should run so resources are used sensibly and the system can keep working even when one machine fails.</p>
+              </article>
+            </div>
+            <article class="card" style="margin-top: 16px;">
+              <h3>Orchestration memory guide</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Desired state matters</strong><br />You describe what should exist.</div>
+                <div class="layer"><strong>Automation closes the gap</strong><br />The platform works toward the target state.</div>
+                <div class="layer"><strong>Recovery is continuous</strong><br />Failure handling becomes an ongoing process.</div>
+                <div class="layer"><strong>Networking and identity stay stable</strong><br />Services must remain reachable even when containers change.</div>
+              </div>
+            </article>
+          </section>
+          <p class="page-end">Next page: Lesson 29 focuses on production security and runtime hardening.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

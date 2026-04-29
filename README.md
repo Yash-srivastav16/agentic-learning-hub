@@ -1,6 +1,6 @@
-# Docker Learning Hub
+# Agentic Learning Hub
 
-An AI-assisted, LMS-style Docker learning platform built to solve a simple problem:
+An AI-assisted learning repo built around a simple problem:
 
 learning a technology usually means jumping across too many disconnected places:
 - official documentation
@@ -9,7 +9,13 @@ learning a technology usually means jumping across too many disconnected places:
 - notes
 - blog posts
 
-This project brings those ideas into one structured product-like learning experience with:
+This repo brings those ideas into one structured, reusable workflow.
+
+Right now it includes:
+- a full Docker LMS-style learning app
+- a reusable Codex skill for generating similar course platforms for other technologies
+
+The current Docker app includes:
 - sequential lessons
 - progress tracking
 - local notes
@@ -29,6 +35,12 @@ Instead of keeping notes in one place, course links in another, and memory check
 The more interesting part is that the structure is reusable.
 
 The project also includes a Codex skill, `course-lms-builder`, that can generate similar structured learning hubs for other technologies.
+
+## Current app
+
+The active example app in this repo is:
+
+- [apps/docker-learning-hub](./apps/docker-learning-hub)
 
 ## What the site includes
 
@@ -58,17 +70,20 @@ Most people will open a shared project from LinkedIn on mobile first, so this re
 ## Project structure
 
 ```text
-docker-learning-site/
-├── index.html
-├── lesson-1.html ... lesson-30.html
-├── revision.html
-├── glossary.html
-├── certificate.html
-├── course-summary.html
-├── app.js
-├── styles.css
-├── carousel/
-│   └── slide assets for LinkedIn
+agentic-learning-hub/
+├── README.md
+├── .gitignore
+├── apps/
+│   └── docker-learning-hub/
+│       ├── index.html
+│       ├── revision.html
+│       ├── glossary.html
+│       ├── certificate.html
+│       ├── course-summary.html
+│       ├── app.js
+│       ├── styles.css
+│       └── lessons/
+│           └── lesson-1.html ... lesson-30.html
 └── skills/
     └── course-lms-builder/
 ```
@@ -82,17 +97,17 @@ This is a static site, so you can open it directly in a browser.
 Open:
 
 ```text
-index.html
+apps/docker-learning-hub/index.html
 ```
 
-from the `docker-learning-site` folder.
+from the repo root.
 
 ### Option 2: serve locally
 
 If you want a local server:
 
 ```bash
-cd docker-learning-site
+cd apps/docker-learning-hub
 python3 -m http.server 8000
 ```
 
@@ -160,14 +175,15 @@ Instead of manually assembling a course experience from scattered resources, it 
 For a typical static learning hub, the skill is designed to generate:
 
 ```text
-index.html
-lesson-N.html pages
-revision.html
-course-summary.html
-glossary.html
-certificate.html
-styles.css
-app.js
+apps/<course-slug>/
+  index.html
+  revision.html
+  course-summary.html
+  glossary.html
+  certificate.html
+  styles.css
+  app.js
+  lessons/lesson-N.html
 ```
 
 And it expects the product to include:

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 29 | Production Security and Hardening</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 29 • Production security and hardening</span>
+      </header>
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 29</h2>
+            <p>This lesson explains how security thinking becomes stricter in production than in beginner local Docker setups.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="../index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-26.html"><span class="icon-badge icon-sea">26</span><span><strong>Lesson 26</strong>Introduction to Kubernetes</span></a>
+            <a class="sidebar-link" href="./lesson-27.html"><span class="icon-badge icon-mint">27</span><span><strong>Lesson 27</strong>Scaling containers</span></a>
+            <a class="sidebar-link" href="./lesson-28.html"><span class="icon-badge icon-violet">28</span><span><strong>Lesson 28</strong>Container orchestration concepts</span></a>
+            <a class="sidebar-link active" href="./lesson-29.html"><span class="icon-badge icon-orange">29</span><span><strong>Lesson 29</strong>Production security and hardening</span></a>
+            <a class="sidebar-link" href="./lesson-30.html"><span class="icon-badge icon-sea">30</span><span><strong>Lesson 30</strong>Real-world deployment architectures</span></a>
+            <a class="sidebar-link" href="../revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 29</span>
+                <h1>Production security and hardening</h1>
+              </div>
+              <p>This page explains the mindset shift from basic container safety habits to stricter production-focused hardening practices.</p>
+            </div>
+            <div class="three-up">
+              <article class="card"><div class="card-header"><div><h3>Least privilege</h3></div></div><p>Production systems should avoid giving containers more permissions, packages, or access than they truly need.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Controlled secrets</h3></div></div><p>Secrets should be handled carefully, rotated safely, and kept outside images whenever possible.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Reduced attack surface</h3></div></div><p>Smaller images, fewer tools, tighter users, and simpler runtime assumptions reduce the chances of avoidable security problems.</p></article>
+            </div>
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Weak production posture</h3>
+                <div class="mini-stack">
+                  <div><strong>Root user</strong></div>
+                  <div><strong>Extra packages</strong></div>
+                  <div><strong>Secrets baked in</strong></div>
+                </div>
+              </article>
+              <article class="diagram-card">
+                <h3>Stronger production posture</h3>
+                <div class="mini-stack">
+                  <div><strong>Non-root where possible</strong></div>
+                  <div><strong>Minimal runtime image</strong></div>
+                  <div><strong>External secret handling</strong></div>
+                </div>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Hardening themes</h3>
+                <ul>
+                  <li>Run with the least permissions you can.</li>
+                  <li>Install only what is required at runtime.</li>
+                  <li>Use trusted base images and keep them updated.</li>
+                  <li>Limit exposed ports and unnecessary access paths.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Secret handling reminders</h3>
+                <ul>
+                  <li>Do not bake secrets directly into images.</li>
+                  <li>Keep environment-based secrets controlled carefully.</li>
+                  <li>Review where secrets appear in logs and config.</li>
+                  <li>Treat production credentials differently from local defaults.</li>
+                </ul>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Simple hardening checklist</h3>
+                <div class="code-box">
+                  <code>- minimal image
+- trusted base image
+- non-root user where possible
+- no baked secrets
+- limited runtime permissions</code>
+                </div>
+                <p>Even this short checklist improves security posture noticeably compared with a casual local-only setup.</p>
+              </article>
+              <article class="card">
+                <h3>Common beginner mistake</h3>
+                <p>Assuming that container isolation alone makes a production service secure. Good runtime boundaries still need deliberate design.</p>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Production vs local mindset</h3>
+                <p>Local environments often prioritize convenience. Production systems prioritize control, traceability, and risk reduction. Hardening is where that difference becomes very visible.</p>
+              </article>
+              <article class="card">
+                <h3>Typical hardening questions</h3>
+                <ul>
+                  <li>Does this container need root access?</li>
+                  <li>Does it expose more ports than necessary?</li>
+                  <li>Does it contain tools that only developers need?</li>
+                  <li>Where do secrets live and how are they rotated?</li>
+                </ul>
+              </article>
+            </div>
+            <article class="card" style="margin-top: 16px;">
+              <h3>Hardening memory guide</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Production is stricter than development</strong><br />Convenience settings should be questioned.</div>
+                <div class="layer"><strong>Less access is safer</strong><br />Least privilege should guide runtime choices.</div>
+                <div class="layer"><strong>Smaller images help security too</strong><br />Fewer packages often mean fewer risks.</div>
+                <div class="layer"><strong>Secrets need special handling</strong><br />They should not live casually inside images or source history.</div>
+              </div>
+            </article>
+          </section>
+          <p class="page-end">Next page: Lesson 30 closes the roadmap with real-world deployment architecture thinking.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

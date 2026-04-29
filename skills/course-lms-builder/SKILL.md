@@ -11,6 +11,8 @@ Build a polished, structured learning hub for a technology topic using the same 
 
 Prefer a static site with shared `styles.css` and `app.js` unless the user explicitly asks for a framework. Preserve an existing site's visual language when extending it. When starting from scratch, keep the experience premium, calm, structured, and clearly sequential.
 
+When working inside this repo, treat `apps/docker-learning-hub/` as the canonical UI template when it exists. Future course sites should look like siblings of the current Docker product, not unrelated redesigns. Reuse the same overall shell, spacing rhythm, component hierarchy, and interaction model unless the user explicitly asks for a different visual direction.
+
 For larger or reusable course repos, prefer placing each course app inside `apps/<course-slug>/` and keeping lesson pages inside `apps/<course-slug>/lessons/` so the repo root stays focused on shared skills, docs, and app folders.
 
 ## Workflow
@@ -39,6 +41,37 @@ Default to this structure when the user wants a product-like learning site:
 
 Read `references/course-blueprint.md` before implementing the page map and LMS features.
 
+### 2.5. Clone the proven UI before inventing anything new
+
+If the repo already contains `apps/docker-learning-hub/`, use it as the primary design reference:
+- mirror the same topbar + sticky sidebar + main content shell
+- keep the same lesson-roadmap feel and premium dashboard-like overview
+- preserve the same button styles, stat cards, progress treatments, and milestone patterns
+- keep the same dark-mode-first polish, rounded cards, subtle glows, and spacing discipline
+- keep glossary, revision, summary, and certificate as sibling product pages
+- keep the same mobile behaviors: collapsible course map, stacked cards, bottom next-lesson navigation
+
+For a new technology in this repo, prefer duplicating the current app structure and then replacing:
+- titles, icons, and branding labels
+- lesson roadmap and phase names
+- glossary terms
+- quiz bank
+- certificate wording
+- resource links and external references
+
+Do not invent a completely different UI theme for each technology unless the user explicitly asks for a redesign. The default expectation is "same product family, different subject."
+
+If that canonical UI reference is not available, fall back to a stable default house style:
+- premium dark-first LMS shell
+- branded topbar
+- sticky or collapsible course-map sidebar
+- dashboard-style overview hero with progress and stat cards
+- modular lesson cards with rounded borders and subtle glow
+- glossary, revision, summary, and certificate as matching utility pages
+- mobile-first stacked layout with bottom next-lesson navigation
+
+In other words: when the reference app is missing, recreate the same product philosophy, not a random new visual theme.
+
 ### 3. Write the lessons like an educator
 
 For each lesson, keep the content sequential and teaching-focused:
@@ -47,6 +80,7 @@ For each lesson, keep the content sequential and teaching-focused:
 - use analogies where helpful
 - add diagrams, flow blocks, or comparison cards
 - include practical examples
+- include curated learn-more references when helpful
 - include mistakes to avoid
 - include a short checkpoint or quiz
 
@@ -70,6 +104,7 @@ Default LMS features:
 - lesson notes stored locally
 - lesson quizzes stored locally
 - glossary and certificate access from shared navigation
+- a consistent learn-more resource system for official docs, videos, and structured course links
 
 ### 5. Make progression feel intentional
 
@@ -93,6 +128,14 @@ Avoid generic AI-looking layouts. Aim for:
 - readable typography
 - responsive behavior for desktop and mobile
 
+Visual-family rules when matching the current Docker hub:
+- keep the top-level composition recognizable: branded topbar, left roadmap, right learning dashboard/content
+- keep the hero area product-like instead of blog-like
+- prefer the same visual language of deep dark surfaces, cyan/mint accents, subtle borders, and luminous progress states
+- keep cards modular and consistent rather than mixing unrelated visual styles
+- reuse the same utility-page feel for glossary, revision, summary, certificate, and milestone states
+- if a technology has its own brand color, use it only as a supporting accent; do not replace the whole design system
+
 Responsive safety rules:
 - do not rely on `max-content`, `fit-content`, or fixed-width grid columns for primary action rows on smaller screens
 - let grid and flex children shrink with `min-width: 0` where needed
@@ -101,6 +144,25 @@ Responsive safety rules:
 - verify no lesson, tracker, glossary, or certificate section causes right-side overflow on mobile widths
 
 Do not overload the user with clutter. Add features only when they improve learning.
+
+### 6.5. Include curated resource lanes
+
+By default, include a lightweight but useful external-reference system so learners do not need to leave the course blindly:
+- an overview-level `Reference Hub` or `Learn More` area
+- optional lesson-level `Learn more` cards for harder topics
+- categories such as:
+  - `Official Docs`
+  - `YouTube / Video Walkthrough`
+  - `Udemy / Structured Course`
+  - `Cheat Sheet` or `Practice Sandbox`
+
+Resource guidance:
+- prefer official docs for the most authoritative reference
+- when the user provides specific YouTube or Udemy links, surface them clearly
+- if curated external resources are requested and browsing is available, verify good sources before linking
+- if live verification is not possible, create clearly labeled link slots or placeholder cards that are easy to update
+- keep resource cards concise and consistent with the rest of the LMS design
+- do not let external references dominate the main lesson; they should support the structured course, not replace it
 
 ### 7. Validate the learning product
 
@@ -119,8 +181,10 @@ Before finishing:
 When the user asks for a similar course for another technology:
 1. reuse the same LMS architecture
 2. replace the course content, glossary terms, quizzes, and phase names
-3. keep the teaching tone beginner-friendly unless the user asks for a different level
-4. preserve any existing premium UI if updating an earlier site
+3. reuse the current app's visual shell first so the new course feels like the same product family
+4. include curated external reference slots for docs, video, and course links when useful
+5. keep the teaching tone beginner-friendly unless the user asks for a different level
+6. preserve any existing premium UI if updating an earlier site
 
 ## References
 

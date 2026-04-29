@@ -221,6 +221,7 @@ And it expects the product to include:
 - glossary terms
 - milestone celebrations
 - mobile course-map navigation
+- curated `Learn more` resources such as official docs, YouTube, and structured course links when useful
 
 ### Responsive and mobile guarantees built into the skill
 
@@ -234,6 +235,20 @@ It tells future generations to:
 - verify no lesson, tracker, glossary, or certificate screen spills to the right on mobile
 
 That makes the reusable workflow safer for mobile-first sharing.
+
+### UI consistency rules built into the skill
+
+The skill now prefers the current Docker app as the canonical visual reference when it exists.
+
+That means future courses should stay in the same product family:
+- topbar + sticky/collapsible sidebar
+- dashboard-like overview hero
+- premium dark LMS shell
+- progress cards and milestone flow
+- glossary, summary, revision, and certificate sibling pages
+- bottom next-lesson navigation
+
+If the exact Docker UI reference is not available, the skill falls back to the same house style instead of inventing a random new theme.
 
 ### Example uses
 
@@ -278,16 +293,30 @@ Use $course-lms-builder to create a premium LMS-style learning site for [technol
 Include phased lessons, progress tracking, quizzes, glossary, certificate, dark mode, and mobile-friendly navigation.
 ```
 
+This is the stronger prompt pattern if you want outputs to stay close to the current Docker product:
+
+```text
+Use $course-lms-builder to create a [technology] learning hub in the same UI family as apps/docker-learning-hub.
+Keep the same premium LMS shell, roadmap-first layout, progress tracker, glossary, revision, summary, certificate, dark mode, and mobile-friendly lesson flow.
+Include a Reference Hub and lesson-level Learn More cards for official docs, YouTube, and Udemy or structured course links.
+If the exact UI reference is unavailable, keep the same product philosophy instead of creating a completely different design.
+```
+
 You can also add constraints such as:
 - beginner vs advanced audience
 - number of phases
 - whether to extend an existing site
 - whether to preserve an existing visual style
+- whether to include verified or placeholder external resources
 
 ### Example prompt set
 
 ```text
 Use $course-lms-builder to create a beginner-to-advanced Kubernetes course in 4 phases.
+```
+
+```text
+Use $course-lms-builder to create a Kubernetes learning hub in the same UI family as apps/docker-learning-hub, including a Reference Hub and lesson-level Learn More cards for official docs, YouTube, and Udemy resources.
 ```
 
 ```text

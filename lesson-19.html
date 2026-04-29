@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 19 | Reverse Proxy with Nginx</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 19 • Reverse proxy with Nginx</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 19</h2>
+            <p>This lesson explains why Nginx is often placed in front of application containers instead of exposing every service directly.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="./index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-18.html"><span class="icon-badge icon-sea">18</span><span><strong>Lesson 18</strong>Deploying Docker apps</span></a>
+            <a class="sidebar-link active" href="./lesson-19.html"><span class="icon-badge icon-mint">19</span><span><strong>Lesson 19</strong>Reverse proxy with Nginx</span></a>
+            <a class="sidebar-link" href="./lesson-20.html"><span class="icon-badge icon-violet">20</span><span><strong>Lesson 20</strong>Dockerizing full stack apps</span></a>
+            <a class="sidebar-link" href="./lesson-21.html"><span class="icon-badge icon-orange">21</span><span><strong>Lesson 21</strong>Working with databases in Docker</span></a>
+            <a class="sidebar-link" href="./lesson-22.html"><span class="icon-badge icon-sea">22</span><span><strong>Lesson 22</strong>CI/CD with Docker</span></a>
+            <a class="sidebar-link" href="./lesson-23.html"><span class="icon-badge icon-mint">23</span><span><strong>Lesson 23</strong>Monitoring and logs</span></a>
+            <a class="sidebar-link" href="./lesson-24.html"><span class="icon-badge icon-violet">24</span><span><strong>Lesson 24</strong>Compose advanced patterns</span></a>
+            <a class="sidebar-link" href="./lesson-25.html"><span class="icon-badge icon-orange">25</span><span><strong>Lesson 25</strong>Docker in team projects</span></a>
+            <a class="sidebar-link" href="./revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 19</span>
+                <h1>Reverse proxy with Nginx</h1>
+              </div>
+              <p>This page explains how one front-facing service can receive browser traffic and then forward requests to the correct container behind the scenes.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card"><div class="card-header"><div><h3>What it does</h3></div></div><p>Nginx receives requests first, then forwards them to the right app or service based on path, host, or rule.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Why it helps</h3></div></div><p>It centralizes domains, SSL, routing, and port management so app containers can stay focused on application logic.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Common pattern</h3></div></div><p>Browser traffic often hits Nginx on port 80 or 443, and Nginx forwards traffic to internal containers on their private ports.</p></article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Single app routing</h3>
+                <div class="mini-stack">
+                  <div><strong>Browser</strong></div>
+                  <div><strong>Nginx</strong></div>
+                  <div><strong>App container</strong></div>
+                </div>
+              </article>
+              <article class="diagram-card">
+                <h3>Split routing</h3>
+                <div class="mini-stack">
+                  <div><strong>/</strong> goes to frontend</div>
+                  <div><strong>/api</strong> goes to backend</div>
+                  <div><strong>One domain, multiple services</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Why not expose every container directly</h3>
+                <ul>
+                  <li>Port handling becomes messy fast.</li>
+                  <li>Domain setup becomes harder to organize.</li>
+                  <li>SSL setup gets repeated in multiple places.</li>
+                  <li>Traffic flow becomes less predictable.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Where Nginx adds value</h3>
+                <ul>
+                  <li>Routing requests to frontend or backend.</li>
+                  <li>Serving static files efficiently.</li>
+                  <li>Acting as the public web entry point.</li>
+                  <li>Handling HTTPS before traffic reaches the app.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Simple proxy idea</h3>
+                <div class="code-box">
+                  <code>Browser -> nginx:80
+nginx -> frontend:3000
+nginx -> backend:5000</code>
+                </div>
+                <p>The user only sees the public web address. Internal container ports remain hidden behind the proxy.</p>
+              </article>
+              <article class="card">
+                <h3>Beginner confusion to avoid</h3>
+                <p>Nginx is not replacing your backend. It is standing in front of it, guiding incoming traffic to the correct destination.</p>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Reverse proxy memory guide</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Nginx is the front desk</strong><br />Requests arrive there first.</div>
+                <div class="layer"><strong>Your app stays behind it</strong><br />The app does not need to directly manage every public traffic concern.</div>
+                <div class="layer"><strong>Routing becomes cleaner</strong><br />One domain can serve multiple containers.</div>
+                <div class="layer"><strong>Public ports and internal ports stay separated</strong><br />That makes the overall setup easier to control.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 20 brings frontend, backend, and database together into one full stack Docker workflow.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

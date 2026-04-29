@@ -1,0 +1,4 @@
+interface:
+  display_name: "Course LMS Builder"
+  short_description: "Build premium multi-page tech course sites"
+  default_prompt: "Use $course-lms-builder to create a polished responsive multi-page learning course site for a technology topic with lessons, tracker, quizzes, glossary, milestones, and certificate."

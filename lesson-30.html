@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 30 | Real-World Deployment Architectures</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 30 • Real-world deployment architectures</span>
+      </header>
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 30</h2>
+            <p>This lesson ties the roadmap together by showing how Docker fits into larger system architecture choices.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="./index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-26.html"><span class="icon-badge icon-sea">26</span><span><strong>Lesson 26</strong>Introduction to Kubernetes</span></a>
+            <a class="sidebar-link" href="./lesson-27.html"><span class="icon-badge icon-mint">27</span><span><strong>Lesson 27</strong>Scaling containers</span></a>
+            <a class="sidebar-link" href="./lesson-28.html"><span class="icon-badge icon-violet">28</span><span><strong>Lesson 28</strong>Container orchestration concepts</span></a>
+            <a class="sidebar-link" href="./lesson-29.html"><span class="icon-badge icon-orange">29</span><span><strong>Lesson 29</strong>Production security and hardening</span></a>
+            <a class="sidebar-link active" href="./lesson-30.html"><span class="icon-badge icon-sea">30</span><span><strong>Lesson 30</strong>Real-world deployment architectures</span></a>
+            <a class="sidebar-link" href="./revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 30</span>
+                <h1>Real-world deployment architectures</h1>
+              </div>
+              <p>This page explains how containers fit into broader systems, where many layers work together beyond one image and one server.</p>
+            </div>
+            <div class="three-up">
+              <article class="card"><div class="card-header"><div><h3>System view</h3></div></div><p>Real systems are made of multiple services, routing layers, storage systems, security controls, and operational tools working together.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Docker’s place</h3></div></div><p>Docker is often one layer in a bigger platform, not the whole platform by itself.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Main lesson</h3></div></div><p>Strong engineering means understanding how containers connect to networking, storage, deployment pipelines, observability, and team workflows.</p></article>
+            </div>
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Simple real-world shape</h3>
+                <div class="mini-stack">
+                  <div><strong>Users</strong></div>
+                  <div><strong>Proxy / gateway</strong></div>
+                  <div><strong>Application services</strong></div>
+                  <div><strong>Databases / storage</strong></div>
+                </div>
+              </article>
+              <article class="diagram-card">
+                <h3>Supporting layers</h3>
+                <div class="mini-stack">
+                  <div><strong>CI/CD</strong></div>
+                  <div><strong>Observability</strong></div>
+                  <div><strong>Security controls</strong></div>
+                  <div><strong>Orchestration</strong></div>
+                </div>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>What real architectures usually include</h3>
+                <ul>
+                  <li>One or more application services.</li>
+                  <li>Data storage with persistence and backup plans.</li>
+                  <li>Ingress or reverse proxy handling incoming traffic.</li>
+                  <li>Deployment automation and runtime observation.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Why this lesson matters at the end</h3>
+                <ul>
+                  <li>It helps you stop thinking only in single-container terms.</li>
+                  <li>It connects all earlier lessons into one system picture.</li>
+                  <li>It shows where Docker fits in modern engineering practice.</li>
+                  <li>It prepares you for deeper platform learning later.</li>
+                </ul>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>One useful mental summary</h3>
+                <div class="code-box">
+                  <code>Code -> Image -> Container -> Service -> System</code>
+                </div>
+                <p>This progression captures how Docker knowledge grows from isolated basics into real architectural thinking.</p>
+              </article>
+              <article class="card">
+                <h3>Common beginner mistake</h3>
+                <p>Seeing Docker as the complete answer to production design, instead of one very important building block inside a larger delivery and operations system.</p>
+              </article>
+            </div>
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>How all earlier lessons connect here</h3>
+                <ul>
+                  <li>Images and Dockerfiles package the app.</li>
+                  <li>Volumes and databases handle persistence.</li>
+                  <li>Networks and proxies handle communication.</li>
+                  <li>CI/CD, monitoring, scaling, and hardening support operations.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Good architecture thinking</h3>
+                <p>A strong system is not just a collection of containers. It is a set of deliberate choices about reliability, security, observability, data flow, and team workflow.</p>
+              </article>
+            </div>
+            <article class="card" style="margin-top: 16px;">
+              <h3>Final architecture memory guide</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Applications rarely run alone</strong><br />They live inside larger service systems.</div>
+                <div class="layer"><strong>Docker is a foundational layer</strong><br />It packages and runs workloads consistently.</div>
+                <div class="layer"><strong>Operations complete the picture</strong><br />Deployment, security, scaling, and monitoring matter too.</div>
+                <div class="layer"><strong>Architecture is about fit</strong><br />Choose the right combination of tools and patterns for the system’s needs.</div>
+              </div>
+            </article>
+          </section>
+          <p class="page-end">Next page: open the final course summary page for a full-roadmap recap.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

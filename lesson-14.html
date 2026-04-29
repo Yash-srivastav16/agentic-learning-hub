@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 14 | Multi-Stage Builds</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 14 • Multi-stage builds</span>
+      </header>
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 14</h2>
+            <p>This lesson explains how to build an application in one stage and run it from a smaller final image.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="./index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-11.html"><span class="icon-badge icon-orange">11</span><span><strong>Lesson 11</strong>Docker image optimization</span></a>
+            <a class="sidebar-link" href="./lesson-12.html"><span class="icon-badge icon-sea">12</span><span><strong>Lesson 12</strong>Dockerfile best practices</span></a>
+            <a class="sidebar-link" href="./lesson-13.html"><span class="icon-badge icon-mint">13</span><span><strong>Lesson 13</strong>Bind mounts vs volumes</span></a>
+            <a class="sidebar-link active" href="./lesson-14.html"><span class="icon-badge icon-violet">14</span><span><strong>Lesson 14</strong>Multi-stage builds</span></a>
+            <a class="sidebar-link" href="./lesson-15.html"><span class="icon-badge icon-orange">15</span><span><strong>Lesson 15</strong>Docker Hub and registries</span></a>
+            <a class="sidebar-link" href="./lesson-16.html"><span class="icon-badge icon-sea">16</span><span><strong>Lesson 16</strong>Docker security basics</span></a>
+            <a class="sidebar-link" href="./lesson-17.html"><span class="icon-badge icon-mint">17</span><span><strong>Lesson 17</strong>Development vs production setup</span></a>
+            <a class="sidebar-link" href="./revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div><span class="tag">Lesson 14</span><h1>Multi-stage builds</h1></div>
+              <p>This page shows how Docker can use one stage for building and another stage for running, which keeps the final image cleaner.</p>
+            </div>
+            <div class="three-up">
+              <article class="card"><div class="card-header"><span class="card-icon"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="9" width="22" height="18" rx="4" fill="#0db7ed"></rect><path d="M11 18h14" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path></svg></span><div><h3>Builder stage</h3></div></div><p>The first stage installs tools and creates the final build output.</p></article>
+              <article class="card"><div class="card-header"><span class="card-icon"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="12" fill="#10b981"></circle><path d="M12 18h12M18 12v12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path></svg></span><div><h3>Runtime stage</h3></div></div><p>The final stage copies only what is needed to run the app and leaves build clutter behind.</p></article>
+              <article class="card"><div class="card-header"><span class="card-icon"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 8 28 26H8Z" fill="#7c3aed"></path><path d="M18 14v5M18 23h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path></svg></span><div><h3>Why it matters</h3></div></div><p>This is one of the best ways to create smaller, cleaner production images.</p></article>
+            </div>
+            <article class="card" style="margin-top:16px;"><h3>Example structure</h3><div class="code-box"><code>FROM node:18 AS builder
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/dist /app/dist
+CMD ["node", "dist/server.js"]</code></div></article>
+            <div class="two-up" style="margin-top:16px;">
+              <article class="card"><h3>Main benefits</h3><ul><li>Smaller final images</li><li>Cleaner runtime environment</li><li>Build-only tools stay out of the final stage</li></ul></article>
+              <article class="card"><h3>Common mistakes</h3><ul><li>Copying too much from the builder stage</li><li>Installing unnecessary runtime tools again in the final stage</li><li>Not understanding what files the app actually needs at startup</li></ul></article>
+            </div>
+          </section>
+          <p class="page-end">Next page: Lesson 15 explains Docker Hub and registries so you can tag, push, and pull your own images properly.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

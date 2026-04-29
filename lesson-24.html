@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 24 | Docker Compose Advanced Patterns</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 24 • Docker Compose advanced patterns</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 24</h2>
+            <p>This lesson explores how Compose grows beyond the first beginner examples and becomes easier to manage across larger projects.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="./index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-18.html"><span class="icon-badge icon-sea">18</span><span><strong>Lesson 18</strong>Deploying Docker apps</span></a>
+            <a class="sidebar-link" href="./lesson-19.html"><span class="icon-badge icon-mint">19</span><span><strong>Lesson 19</strong>Reverse proxy with Nginx</span></a>
+            <a class="sidebar-link" href="./lesson-20.html"><span class="icon-badge icon-violet">20</span><span><strong>Lesson 20</strong>Dockerizing full stack apps</span></a>
+            <a class="sidebar-link" href="./lesson-21.html"><span class="icon-badge icon-orange">21</span><span><strong>Lesson 21</strong>Working with databases in Docker</span></a>
+            <a class="sidebar-link" href="./lesson-22.html"><span class="icon-badge icon-sea">22</span><span><strong>Lesson 22</strong>CI/CD with Docker</span></a>
+            <a class="sidebar-link" href="./lesson-23.html"><span class="icon-badge icon-mint">23</span><span><strong>Lesson 23</strong>Monitoring and logs</span></a>
+            <a class="sidebar-link active" href="./lesson-24.html"><span class="icon-badge icon-violet">24</span><span><strong>Lesson 24</strong>Compose advanced patterns</span></a>
+            <a class="sidebar-link" href="./lesson-25.html"><span class="icon-badge icon-orange">25</span><span><strong>Lesson 25</strong>Docker in team projects</span></a>
+            <a class="sidebar-link" href="./revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 24</span>
+                <h1>Docker Compose advanced patterns</h1>
+              </div>
+              <p>This page explains how Compose structure becomes more important when a project has multiple services, environments, and team members.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card"><div class="card-header"><div><h3>Overrides</h3></div></div><p>Different environments often need different settings, so Compose files must be organized for flexibility without becoming messy.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Reuse</h3></div></div><p>Larger projects benefit from reducing repeated service definitions and keeping structure more maintainable.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Main value</h3></div></div><p>Advanced Compose patterns help teams keep multi-service local environments readable and less fragile as the project grows.</p></article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Beginner Compose</h3>
+                <div class="mini-stack">
+                  <div><strong>One file</strong></div>
+                  <div><strong>Few services</strong></div>
+                  <div><strong>Simple ports and volumes</strong></div>
+                </div>
+              </article>
+              <article class="diagram-card">
+                <h3>Growing project Compose</h3>
+                <div class="mini-stack">
+                  <div><strong>More services</strong></div>
+                  <div><strong>Different environments</strong></div>
+                  <div><strong>Need clearer structure</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Why basic Compose becomes hard later</h3>
+                <ul>
+                  <li>Duplication grows across services.</li>
+                  <li>Development and production needs drift apart.</li>
+                  <li>Files become harder to scan and update.</li>
+                  <li>Teams need cleaner shared patterns.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>What advanced patterns usually aim for</h3>
+                <ul>
+                  <li>Cleaner environment-specific configuration.</li>
+                  <li>Less repeated YAML.</li>
+                  <li>More predictable service naming and structure.</li>
+                  <li>Easier maintenance as the stack grows.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Example structure idea</h3>
+                <div class="code-box">
+                  <code>compose.yaml
+compose.dev.yaml
+compose.prod.yaml</code>
+                </div>
+                <p>This kind of split helps keep one giant Compose file from carrying every environment decision at once.</p>
+              </article>
+              <article class="card">
+                <h3>Main caution</h3>
+                <p>Advanced Compose should improve clarity, not turn a project into complicated YAML for its own sake. The goal is structure with purpose.</p>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Compose maturity guide</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Start simple</strong><br />One file is fine for early learning.</div>
+                <div class="layer"><strong>Organize when repetition appears</strong><br />That is usually the signal to improve structure.</div>
+                <div class="layer"><strong>Separate environment concerns clearly</strong><br />Do not mix every situation into one giant block.</div>
+                <div class="layer"><strong>Keep team readability high</strong><br />Future maintainers should still understand the setup easily.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 25 explains how Docker setup quality affects onboarding, consistency, and collaboration in team projects.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

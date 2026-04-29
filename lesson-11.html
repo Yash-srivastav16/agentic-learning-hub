@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 11 | Docker Image Optimization</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🐳</span>
+          Docker Learning Hub
+        </div>
+        <span class="brand-sub">Lesson 11 • Docker image optimization</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 11</h2>
+            <p>This lesson explains how to make Docker images smaller, faster, and cleaner so builds and deployments become more efficient.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="./index.html">
+              <span class="icon-badge icon-orange">O</span>
+              <span><strong>Overview</strong>Course landing and structure</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-1.html">
+              <span class="icon-badge icon-sea">1</span>
+              <span><strong>Lesson 1</strong>Docker basics and purpose</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-2.html">
+              <span class="icon-badge icon-mint">2</span>
+              <span><strong>Lesson 2</strong>Images, containers, and Dockerfile</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-3.html">
+              <span class="icon-badge icon-orange">3</span>
+              <span><strong>Lesson 3</strong>Build your first real Dockerized app</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-4.html">
+              <span class="icon-badge icon-sea">4</span>
+              <span><strong>Lesson 4</strong>Volumes and persistent data</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-5.html">
+              <span class="icon-badge icon-mint">5</span>
+              <span><strong>Lesson 5</strong>Networks and container communication</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-6.html">
+              <span class="icon-badge icon-violet">6</span>
+              <span><strong>Lesson 6</strong>Compose and multi-container setup</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-7.html">
+              <span class="icon-badge icon-orange">7</span>
+              <span><strong>Lesson 7</strong>Environment variables and configuration</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-8.html">
+              <span class="icon-badge icon-sea">8</span>
+              <span><strong>Lesson 8</strong>Build a small real Docker project</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-9.html">
+              <span class="icon-badge icon-mint">9</span>
+              <span><strong>Lesson 9</strong>Docker debugging and troubleshooting</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-10.html">
+              <span class="icon-badge icon-violet">10</span>
+              <span><strong>Lesson 10</strong>Health checks and readiness</span>
+            </a>
+            <a class="sidebar-link active" href="./lesson-11.html">
+              <span class="icon-badge icon-orange">11</span>
+              <span><strong>Lesson 11</strong>Docker image optimization</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-12.html">
+              <span class="icon-badge icon-sea">12</span>
+              <span><strong>Lesson 12</strong>Dockerfile best practices</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-13.html">
+              <span class="icon-badge icon-mint">13</span>
+              <span><strong>Lesson 13</strong>Bind mounts vs volumes</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-14.html">
+              <span class="icon-badge icon-violet">14</span>
+              <span><strong>Lesson 14</strong>Multi-stage builds</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-15.html">
+              <span class="icon-badge icon-orange">15</span>
+              <span><strong>Lesson 15</strong>Docker Hub and registries</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-16.html">
+              <span class="icon-badge icon-sea">16</span>
+              <span><strong>Lesson 16</strong>Docker security basics</span>
+            </a>
+            <a class="sidebar-link" href="./lesson-17.html">
+              <span class="icon-badge icon-mint">17</span>
+              <span><strong>Lesson 17</strong>Development vs production setup</span>
+            </a>
+            <a class="sidebar-link" href="./revision.html">
+              <span class="icon-badge icon-violet">R</span>
+              <span><strong>Revision</strong>Quick review and next topics</span>
+            </a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 11</span>
+                <h1>Docker image optimization</h1>
+              </div>
+              <p>This page focuses on making images smaller, faster to build, easier to transfer, and cleaner for real project use.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <rect x="8" y="9" width="20" height="18" rx="5" fill="#0db7ed"></rect>
+                      <path d="M13 15h10M13 20h7" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main goal</h3></div>
+                </div>
+                <p>A good image should work well without carrying extra files, tools, or unnecessary weight.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <circle cx="18" cy="18" r="12" fill="#10b981"></circle>
+                      <path d="M12 18h12M18 12v12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main benefits</h3></div>
+                </div>
+                <p>Smaller images usually mean faster builds, faster downloads, quicker deployments, and easier maintenance.</p>
+              </article>
+              <article class="card">
+                <div class="card-header">
+                  <span class="card-icon">
+                    <svg viewBox="0 0 36 36" aria-hidden="true">
+                      <path d="M18 8 28 26H8Z" fill="#7c3aed"></path>
+                      <path d="M18 14v5M18 23h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div><h3>Main warning</h3></div>
+                </div>
+                <p>Optimization should improve clarity and efficiency, not make the Dockerfile confusing too early.</p>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Use a smaller base image</h3>
+                <div class="code-box">
+                  <code>FROM node:18
+
+# smaller option
+FROM node:18-alpine</code>
+                </div>
+                <p>Smaller base images often reduce image size and download time, as long as they still fit your app needs.</p>
+              </article>
+
+              <article class="card">
+                <h3>Use `.dockerignore`</h3>
+                <div class="code-box">
+                  <code>node_modules
+.git
+.env
+dist
+coverage
+npm-debug.log</code>
+                </div>
+                <p>This prevents unnecessary files from being sent into the Docker build context.</p>
+              </article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Bad copy habit</h3>
+                <div class="mini-stack">
+                  <div><strong>COPY . /app</strong></div>
+                  <div><strong>May include extra files</strong></div>
+                  <div><strong>Bigger image</strong></div>
+                </div>
+              </article>
+
+              <article class="diagram-card">
+                <h3>Better copy habit</h3>
+                <div class="mini-stack">
+                  <div><strong>Copy only needed files first</strong></div>
+                  <div><strong>Use `.dockerignore`</strong></div>
+                  <div><strong>Cleaner image</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Cache-friendly Dockerfile order</h3>
+                <div class="code-box">
+                  <code>FROM node:18-alpine
+WORKDIR /app
+COPY package.json /app
+RUN npm install
+COPY server.js /app
+EXPOSE 3000
+CMD ["npm", "start"]</code>
+                </div>
+                <p>Copy dependency files first so Docker can reuse cached install layers when app code changes later.</p>
+              </article>
+
+              <article class="card">
+                <h3>Why order matters</h3>
+                <p>If you copy the whole project before dependency installation, even a small file change may force Docker to reinstall everything again.</p>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Keep runtime images clean</h3>
+                <ul>
+                  <li>Install only necessary packages.</li>
+                  <li>Avoid editors and debug tools in production images.</li>
+                  <li>Keep the final image focused on runtime needs.</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Multi-stage builds</h3>
+                <div class="code-box">
+                  <code>FROM node:18 AS builder
+# build steps
+
+FROM node:18-alpine
+# copy only final output</code>
+                </div>
+                <p>One stage builds the app, the final stage keeps only what is needed to run it.</p>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Optimization checklist</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Use a suitable base image</strong><br />Prefer smaller images when they still work well for your app.</div>
+                <div class="layer"><strong>Add `.dockerignore`</strong><br />Stop unnecessary files from entering the build context.</div>
+                <div class="layer"><strong>Order Dockerfile instructions wisely</strong><br />This helps Docker caching work better.</div>
+                <div class="layer"><strong>Keep the image focused</strong><br />Include runtime needs, not extra build or debug clutter.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 12 focuses on Dockerfile best practices so you can write cleaner and more professional Docker build files.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

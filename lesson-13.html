@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 13 | Bind Mounts vs Volumes</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 13 • Bind mounts vs volumes</span>
+      </header>
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 13</h2>
+            <p>This lesson explains when you should connect a real host path directly and when Docker-managed storage is the better choice.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="./index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-11.html"><span class="icon-badge icon-orange">11</span><span><strong>Lesson 11</strong>Docker image optimization</span></a>
+            <a class="sidebar-link" href="./lesson-12.html"><span class="icon-badge icon-sea">12</span><span><strong>Lesson 12</strong>Dockerfile best practices</span></a>
+            <a class="sidebar-link active" href="./lesson-13.html"><span class="icon-badge icon-mint">13</span><span><strong>Lesson 13</strong>Bind mounts vs volumes</span></a>
+            <a class="sidebar-link" href="./lesson-14.html"><span class="icon-badge icon-violet">14</span><span><strong>Lesson 14</strong>Multi-stage builds</span></a>
+            <a class="sidebar-link" href="./lesson-15.html"><span class="icon-badge icon-orange">15</span><span><strong>Lesson 15</strong>Docker Hub and registries</span></a>
+            <a class="sidebar-link" href="./lesson-16.html"><span class="icon-badge icon-sea">16</span><span><strong>Lesson 16</strong>Docker security basics</span></a>
+            <a class="sidebar-link" href="./lesson-17.html"><span class="icon-badge icon-mint">17</span><span><strong>Lesson 17</strong>Development vs production setup</span></a>
+            <a class="sidebar-link" href="./revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div><span class="tag">Lesson 13</span><h1>Bind mounts vs volumes</h1></div>
+              <p>This page explains the practical difference between using your real machine folder and using Docker-managed persistent storage.</p>
+            </div>
+            <div class="three-up">
+              <article class="card"><div class="card-header"><span class="card-icon"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="8" y="10" width="20" height="16" rx="4" fill="#0db7ed"></rect><path d="M12 18h12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path></svg></span><div><h3>Bind mount</h3></div></div><p>Maps a real host file or folder path directly into the container.</p></article>
+              <article class="card"><div class="card-header"><span class="card-icon"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="12" fill="#10b981"></circle><path d="M12 18h12M18 12v12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path></svg></span><div><h3>Volume</h3></div></div><p>Uses storage managed by Docker itself, which is often cleaner for persistent application data.</p></article>
+              <article class="card"><div class="card-header"><span class="card-icon"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 8 28 26H8Z" fill="#7c3aed"></path><path d="M18 14v5M18 23h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path></svg></span><div><h3>Rule of thumb</h3></div></div><p>Bind mounts fit local code development. Volumes fit persistent service data like databases and uploads.</p></article>
+            </div>
+            <div class="two-up" style="margin-top:16px;">
+              <article class="card"><h3>Bind mount example</h3><div class="code-box"><code>docker run -v /Users/yash/project:/app my-image</code></div><p>The container reads your local project folder directly.</p></article>
+              <article class="card"><h3>Volume example</h3><div class="code-box"><code>docker run -v mydata:/app/data my-image</code></div><p>Docker manages <code>mydata</code> and keeps it separate from your host folder structure.</p></article>
+            </div>
+            <article class="card" style="margin-top:16px;"><h3>Choosing the right one</h3><div class="layer-list"><div class="layer"><strong>Use bind mounts for development</strong><br />You want code changes on your host machine to appear immediately inside the container.</div><div class="layer"><strong>Use volumes for persistence</strong><br />You want Docker-managed storage that survives container replacement more cleanly.</div><div class="layer"><strong>Be careful with bind mounts</strong><br />A bind mount can hide files that were already present in the container path.</div></div></article>
+          </section>
+          <p class="page-end">Next page: Lesson 14 explains multi-stage builds and why they help create smaller production-ready images.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

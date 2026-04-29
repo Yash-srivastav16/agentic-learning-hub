@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 25 | Docker in Team Projects</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">🐳</span>Docker Learning Hub</div>
+        <span class="brand-sub">Lesson 25 • Docker in team projects</span>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-head">
+            <h2>Lesson 25</h2>
+            <p>This lesson explains how Docker practices change when multiple developers share the same project, setup, and workflow.</p>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="./index.html"><span class="icon-badge icon-orange">O</span><span><strong>Overview</strong>Course landing and structure</span></a>
+            <a class="sidebar-link" href="./lesson-18.html"><span class="icon-badge icon-sea">18</span><span><strong>Lesson 18</strong>Deploying Docker apps</span></a>
+            <a class="sidebar-link" href="./lesson-19.html"><span class="icon-badge icon-mint">19</span><span><strong>Lesson 19</strong>Reverse proxy with Nginx</span></a>
+            <a class="sidebar-link" href="./lesson-20.html"><span class="icon-badge icon-violet">20</span><span><strong>Lesson 20</strong>Dockerizing full stack apps</span></a>
+            <a class="sidebar-link" href="./lesson-21.html"><span class="icon-badge icon-orange">21</span><span><strong>Lesson 21</strong>Working with databases in Docker</span></a>
+            <a class="sidebar-link" href="./lesson-22.html"><span class="icon-badge icon-sea">22</span><span><strong>Lesson 22</strong>CI/CD with Docker</span></a>
+            <a class="sidebar-link" href="./lesson-23.html"><span class="icon-badge icon-mint">23</span><span><strong>Lesson 23</strong>Monitoring and logs</span></a>
+            <a class="sidebar-link" href="./lesson-24.html"><span class="icon-badge icon-violet">24</span><span><strong>Lesson 24</strong>Compose advanced patterns</span></a>
+            <a class="sidebar-link active" href="./lesson-25.html"><span class="icon-badge icon-orange">25</span><span><strong>Lesson 25</strong>Docker in team projects</span></a>
+            <a class="sidebar-link" href="./revision.html"><span class="icon-badge icon-violet">R</span><span><strong>Revision</strong>Quick review and next topics</span></a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <span class="tag">Lesson 25</span>
+                <h1>Docker in team projects</h1>
+              </div>
+              <p>This page explains why Docker becomes even more valuable when many developers need the same setup, same commands, and same expectations.</p>
+            </div>
+
+            <div class="three-up">
+              <article class="card"><div class="card-header"><div><h3>Consistency</h3></div></div><p>Teams benefit when the same Docker commands, service names, and Compose structure work for everyone.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Onboarding</h3></div></div><p>A clean Docker setup helps new developers start faster because they do not rebuild the environment from scratch manually.</p></article>
+              <article class="card"><div class="card-header"><div><h3>Main value</h3></div></div><p>Docker in teams is not only about containers. It is also about shared workflow, predictability, and lower setup friction.</p></article>
+            </div>
+
+            <div class="diagram-grid" style="margin-top: 16px;">
+              <article class="diagram-card">
+                <h3>Without shared Docker practice</h3>
+                <div class="mini-stack">
+                  <div><strong>Different local setups</strong></div>
+                  <div><strong>Different commands</strong></div>
+                  <div><strong>More “works on my machine” issues</strong></div>
+                </div>
+              </article>
+              <article class="diagram-card">
+                <h3>With shared Docker practice</h3>
+                <div class="mini-stack">
+                  <div><strong>Shared Compose setup</strong></div>
+                  <div><strong>Shared service names</strong></div>
+                  <div><strong>Faster onboarding and debugging</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>Why teams rely on Docker</h3>
+                <ul>
+                  <li>Dependency versions become more consistent.</li>
+                  <li>Project startup steps become easier to document.</li>
+                  <li>Local environments become more repeatable.</li>
+                  <li>New developers can get working faster.</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Good team habits</h3>
+                <ul>
+                  <li>Use consistent service names.</li>
+                  <li>Document the main Compose commands.</li>
+                  <li>Keep environment variable names predictable.</li>
+                  <li>Use clear image tags and project structure.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="two-up" style="margin-top: 16px;">
+              <article class="card">
+                <h3>What a teammate should be able to do</h3>
+                <div class="code-box">
+                  <code>git clone ...
+docker compose up
+# app starts in a known way</code>
+                </div>
+                <p>That simple experience is one of the biggest real benefits of a well-structured Docker team workflow.</p>
+              </article>
+              <article class="card">
+                <h3>Common team mistake</h3>
+                <p>Using Docker in the project, but still depending on unwritten local steps, personal machine tricks, or inconsistent environment assumptions.</p>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top: 16px;">
+              <h3>Team Docker memory guide</h3>
+              <div class="layer-list">
+                <div class="layer"><strong>Docker reduces setup mismatch</strong><br />That supports collaboration.</div>
+                <div class="layer"><strong>Shared commands create predictability</strong><br />Fewer custom local rituals are needed.</div>
+                <div class="layer"><strong>Good structure improves onboarding</strong><br />New developers gain confidence faster.</div>
+                <div class="layer"><strong>Documentation still matters</strong><br />Docker helps a lot, but teams still need clean guidance.</div>
+              </div>
+            </article>
+          </section>
+
+          <p class="page-end">Next page: Lesson 26 begins Phase 4 by introducing Kubernetes and why teams move into orchestration.</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
